@@ -16,6 +16,7 @@ public class MsgSender extends Thread {
 		this.nickname = "[" + nickname + "]";
 		this.socket = socket;
 		try{
+			//Connecting GetOutPutStream to Socket
 			out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
 		}catch(IOException e){
 			System.out.println(e.toString());
@@ -25,6 +26,7 @@ public class MsgSender extends Thread {
 	public void run(){
 		Scanner s = new Scanner(System.in);
 		while(out != null){
+			//Transfer to send it by prefixing an nickname of the person.
 			String msg = s.nextLine();
 			out.println(nickname + msg);
 			out.flush();

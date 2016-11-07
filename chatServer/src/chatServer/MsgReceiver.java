@@ -15,6 +15,7 @@ public class MsgReceiver extends Thread{
 		this.nickname = "[" + nickname + "] ";
 		this.socket = socket;
 		try{
+			//Connect getInputStream to socket
 			in= new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		}catch(IOException e){
 			System.out.println(e.toString());
@@ -25,6 +26,7 @@ public class MsgReceiver extends Thread{
 	{
 		while(in != null)
 		try{
+			//Output to the screen, the received message from the socket.
 			System.out.println(in.readLine());	
 		}catch(IOException e){
 			System.out.println(e.toString());

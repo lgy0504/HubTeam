@@ -22,14 +22,17 @@ public class ChatClient {
 	
 	public void communicate()
 	{
-		MsgSender sender = new MsgSender("클라이언트",socket);
-		MsgReceiver receiver = new MsgReceiver("클라이언트", socket);
+		//Connect the sender and receiver for the input and output to the client socket
+		MsgSender sender = new MsgSender("Client",socket);
+		MsgReceiver receiver = new MsgReceiver("Client", socket);
+		//Run the thread of the sender and receiver
 		sender.start();
 		receiver.start();
 	}
 	public void close()
 	{
 		try{
+			//Exit the client socket
 			socket.close();
 		}catch(IOException e){
 			System.out.println(e.toString());	
@@ -38,16 +41,19 @@ public class ChatClient {
 	
 	public void printInfo()
 	{
-		System.out.println(">>서버 접속에 성공했습니다.");
-		System.out.println("클라이언트 포트번호 : " + socket.getLocalPort());
-		System.out.println("서버 주소 : " + socket.getInetAddress());
-		System.out.println("서버 포트번호 : " + socket.getPort() + '\n');
-		System.out.println(">>서버에 전달할 메시지를 쓰고 Enter를 누르세요." + 'n');
+		System.out.println(">>Server successes to connection.");
+		//The service port number and the client's address and port number Output
+		System.out.println("Client PortNumber : " + socket.getLocalPort());
+		System.out.println("Server Address : " + socket.getInetAddress());
+		System.out.println("Server PortNumber : " + socket.getPort() + '\n');
+		System.out.println(">>Writing message to server and push the Enter key." + 'n');
 	}
 	
 	public static void main(String[] args)
 	{
+		//Specifying a server address and port number to connect to the server
 		ChatClient client = new ChatClient("127.0.0.1", 7070);
+		//Communicating with the server
 		client.communicate();
 	}
 

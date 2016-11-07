@@ -12,7 +12,7 @@ public class ChatServer {
 	public ChatServer (int port)
 	{
 		this.port = port;
-		System.out.println(">>서버를 시작합니다.");
+		System.out.println(">>Starting the Server.");
 		try{
 			server = new ServerSocket(port);
 		}catch(IOException e){
@@ -22,12 +22,15 @@ public class ChatServer {
 	
 	public void communicate()
 	{
-		System.out.println(">>클라이언트가 접속하길 기다리고 있습니다.");
+		System.out.println(">>Waiting for client connection.");
 		 try{
+			 //Wait for client connecting
 			 socket = server.accept();
 			 printInfo();
-			 MsgSender sender = new MsgSender("서버",socket);
-			 MsgReceiver receiver = new MsgReceiver("서버",socket);
+			 //Connect the sender and receiver for the input and output sockets on the server
+			 MsgSender sender = new MsgSender("Server",socket);
+			 MsgReceiver receiver = new MsgReceiver("Server",socket);
+			 //Run the thread of the sender and receiver
 			 receiver.start();
 			 sender.start();
 		 }catch(IOException e){
@@ -37,6 +40,7 @@ public class ChatServer {
 	
 	public void close(){
 		try{
+			//Exit the client socket
 			socket.close();
 		}catch(IOException e){
 			e.printStackTrace();
@@ -44,11 +48,12 @@ public class ChatServer {
 	}
 	
 	public void printInfo(){
-		System.out.println(">>클라이언트가 접속에 성공했습니다.");
-		System.out.println(">>서버 포트번호 : " + socket.getLocalPort());
-		System.out.println(">>클라이언트 주소 : " + socket.getInetAddress());
-		System.out.println(">>클라이언트 포트번호 : " + socket.getPort() + '\n');
-		System.out.println(">>클라이언트에 전달할 메시지를 쓰고 Enter를 누르세요. " + '\n');
+		System.out.println(">>Client successes to connection.");
+		//The service port number and the client's address and port number Output
+		System.out.println(">>Server PortNumber : " + socket.getLocalPort());
+		System.out.println(">>Client Address : " + socket.getInetAddress());
+		System.out.println(">>Client PortNumber : " + socket.getPort() + '\n');
+		System.out.println(">>Writing message to client and push the Enter key. " + '\n');
 	}
 	
 	public static void main(String[] args)
