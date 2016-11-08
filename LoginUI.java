@@ -59,17 +59,18 @@ public class LoginUI extends JFrame {
 		}
 		
 		
-		setTitle("\uB028");
+		setTitle("Hub chatting program");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 446, 293);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(10, 10, 410, 230);
+		panel.setBounds(14, 12, 410, 230);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
