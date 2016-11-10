@@ -74,13 +74,13 @@ public class LoginUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
-		lblNewLabel.setBounds(53, 100, 62, 18);
-		panel.add(lblNewLabel);
+		JLabel lbl_ID = new JLabel("\uC544\uC774\uB514");
+		lbl_ID.setBounds(53, 100, 62, 18);
+		panel.add(lbl_ID);
 		
-		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lblNewLabel_1.setBounds(46, 130, 62, 18);
-		panel.add(lblNewLabel_1);
+		JLabel lbl_PW = new JLabel("\uBE44\uBC00\uBC88\uD638");
+		lbl_PW.setBounds(46, 130, 62, 18);
+		panel.add(lbl_PW);
 		
 		ID_textField = new JTextField();
 		ID_textField.setBounds(120, 97, 116, 24);
@@ -92,26 +92,26 @@ public class LoginUI extends JFrame {
 		panel.add(PW_textField);
 		PW_textField.setColumns(10);
 		
-		JButton Login_btn = new JButton("\uB85C\uADF8\uC778");
-		Login_btn.setBounds(252, 96, 90, 27);
-		panel.add(Login_btn);
+		JButton btnLogin = new JButton("\uB85C\uADF8\uC778"); // 로그인 버튼 클릭시 ID_textField, PW_textField 정보 받아와서 DB에 확인후 로그인
+		btnLogin.setBounds(252, 96, 90, 27);
+		panel.add(btnLogin);
 		
-		JButton New_btn = new JButton("\uD68C\uC6D0\uAC00\uC785");
-		New_btn.setBounds(252, 126, 90, 27);
-		panel.add(New_btn);
+		JButton btnNewmembership = new JButton("\uD68C\uC6D0\uAC00\uC785"); // 회원가입 버튼 클릭시  회원가입창 뜨게함
+		btnNewmembership.setBounds(252, 126, 90, 27);
+		panel.add(btnNewmembership);
 		
-		JLabel lblNewLabel_2 = new JLabel("\uC11C\uBC84 \uC544\uC774\uD53C");
-		lblNewLabel_2.setBounds(53, 167, 80, 18);
-		panel.add(lblNewLabel_2);
+		JLabel lbl_IP = new JLabel("\uC11C\uBC84 \uC544\uC774\uD53C");
+		lbl_IP.setBounds(53, 167, 80, 18);
+		panel.add(lbl_IP);
 		
-		JButton btnNewButton = new JButton("IP \uC785\uB825");
-		btnNewButton.setBounds(147, 163, 116, 27);
-		panel.add(btnNewButton);
+		JButton btnIP = new JButton("IP \uC785\uB825"); // IP입력버튼 클릭시 IP입력창 뜨게함
+		btnIP.setBounds(147, 163, 116, 27);
+		panel.add(btnIP);
 		
-		JLabel lblNewLabel_3 = new JLabel("Hub Chatting Program");
-		lblNewLabel_3.setForeground(new Color(0, 0, 0));
-		lblNewLabel_3.setFont(new Font("Segoe Print", Font.BOLD, 25));
-		lblNewLabel_3.setBounds(53, 40, 301, 33);
-		panel.add(lblNewLabel_3);
+		JLabel lbl_hub = new JLabel("Hub Chatting Program");
+		lbl_hub.setForeground(new Color(0, 0, 0));
+		lbl_hub.setFont(new Font("Segoe Print", Font.BOLD, 25));
+		lbl_hub.setBounds(53, 40, 301, 33);
+		panel.add(lbl_hub);
 	}
 }
