@@ -16,13 +16,22 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import mew.SixClient;
+import mew.User;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class ChattingRoomUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField SendField;
 
 	/**
 	 * Launch the application.
@@ -98,22 +107,64 @@ public class ChattingRoomUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		panel.add(textField, BorderLayout.CENTER);
-		
+		SendField = new JTextField();
+		SendField.setColumns(10);
+		panel.add(SendField, BorderLayout.CENTER);
+		SendField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					msgSummit();
+				}
+			}
+
+		});
+		// 보내기 버튼
 		JButton SendBtn = new JButton("     \uC804\uC1A1     ");
 		panel.add(SendBtn, BorderLayout.EAST);
+		SendBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				msgSummit();
+				SendField.requestFocus();
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(466, 384, 211, 27);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
+		// 나가기버튼
 		JButton OutBtn = new JButton("   \uB098\uAC00\uAE30   ");
 		panel_1.add(OutBtn, BorderLayout.EAST);
-		
+		OutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+			}
+			});
+		// 이모티콘 버튼
 		JButton ImageBtn = new JButton("\uC774\uBAA8\uD2F0\uCF58");
 		panel_1.add(ImageBtn, BorderLayout.WEST);
+		ImageBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//imagemsgSummit
+			}
+		});
+		
+	}
+	private void msgSummit() {
+		String string = SendField.getText();
+		if (!string.equals("")) {
+			try {
+				// 채팅방에 메시지 보냄 
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void imagemsgSummint(){
+		//이모티콘 보내기 함수
 	}
 }
