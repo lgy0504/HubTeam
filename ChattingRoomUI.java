@@ -99,18 +99,21 @@ public class ChattingRoomUI extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		textField = new JTextField();
-		panel.add(textField, BorderLayout.CENTER);
 		textField.setColumns(10);
+		panel.add(textField, BorderLayout.CENTER);
 		
-		JButton btnNewButton = new JButton("     \uC804\uC1A1     ");
-		panel.add(btnNewButton, BorderLayout.EAST);
+		JButton SendBtn = new JButton("     \uC804\uC1A1     ");
+		panel.add(SendBtn, BorderLayout.EAST);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(466, 384, 211, 27);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_1 = new JButton("   \uB098\uAC00\uAE30   ");
-		panel_1.add(btnNewButton_1);
+		JButton OutBtn = new JButton("   \uB098\uAC00\uAE30   ");
+		panel_1.add(OutBtn, BorderLayout.EAST);
+		
+		JButton ImageBtn = new JButton("\uC774\uBAA8\uD2F0\uCF58");
+		panel_1.add(ImageBtn, BorderLayout.WEST);
 	}
 }
