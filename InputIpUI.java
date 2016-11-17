@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.border.EtchedBorder;
 
 public class InputIpUI extends JFrame {
 
@@ -62,43 +63,49 @@ public class InputIpUI extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 354, 225);
+		setBounds(100, 100, 365, 235);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(10, 10, 340, 180);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		JLabel lbl_Ip = new JLabel("IP");
-		lbl_Ip.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+		lbl_Ip.setBounds(119, 70, 14, 21);
+		panel.add(lbl_Ip);
+		lbl_Ip.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 18));
 		lbl_Ip.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_Ip.setBounds(50, 75, 78, 25);
-		contentPane.add(lbl_Ip);
 		
 		textField = new JTextField();
-		textField.setBounds(142, 75, 142, 24);
-		contentPane.add(textField);
+		textField.setBounds(138, 69, 116, 24);
+		panel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel label = new JLabel("\uD3EC\uD2B8\uBC88\uD638");
+		label.setBounds(69, 105, 64, 19);
+		panel.add(label);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("±¼¸²", Font.PLAIN, 16));
-		label.setBounds(50, 112, 78, 25);
-		contentPane.add(label);
+		label.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 16));
 		
 		textField_1 = new JTextField();
+		textField_1.setBounds(138, 103, 116, 24);
+		panel.add(textField_1);
 		textField_1.setColumns(10);
-		textField_1.setBounds(142, 112, 142, 24);
-		contentPane.add(textField_1);
 		
 		lblIpPort = new JLabel("IP & Port number");
+		lblIpPort.setBounds(59, 12, 233, 45);
+		panel.add(lblIpPort);
 		lblIpPort.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIpPort.setForeground(Color.BLACK);
 		lblIpPort.setFont(new Font("Segoe Print", Font.BOLD, 25));
-		lblIpPort.setBounds(14, 25, 300, 33);
-		contentPane.add(lblIpPort);
 		
 		JButton btninput = new JButton("\uC785\uB825");
-		btninput.setBounds(127, 149, 100, 27);
-		contentPane.add(btninput);
+		btninput.setBounds(138, 139, 61, 27);
+		panel.add(btninput);
 	}
 }
