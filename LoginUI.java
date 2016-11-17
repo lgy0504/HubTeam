@@ -12,14 +12,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JPasswordField;
 
 public class LoginUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField ID_textField;
-	private JTextField PW_textField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -41,6 +45,7 @@ public class LoginUI extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginUI() {
+		setResizable(false);
 		
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
@@ -65,7 +70,6 @@ public class LoginUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		setResizable(false);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -75,11 +79,11 @@ public class LoginUI extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lbl_ID = new JLabel("\uC544\uC774\uB514");
-		lbl_ID.setBounds(53, 100, 62, 18);
+		lbl_ID.setBounds(53, 101, 62, 18);
 		panel.add(lbl_ID);
 		
 		JLabel lbl_PW = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lbl_PW.setBounds(46, 130, 62, 18);
+		lbl_PW.setBounds(46, 134, 62, 18);
 		panel.add(lbl_PW);
 		
 		ID_textField = new JTextField();
@@ -87,13 +91,16 @@ public class LoginUI extends JFrame {
 		panel.add(ID_textField);
 		ID_textField.setColumns(10);
 		
-		PW_textField = new JTextField();
-		PW_textField.setBounds(120, 127, 116, 24);
-		panel.add(PW_textField);
-		PW_textField.setColumns(10);
-		
 		JButton btnLogin = new JButton("\uB85C\uADF8\uC778"); // 로그인 버튼 클릭시 ID_textField, PW_textField 정보 받아와서 DB에 확인후 로그인
 		btnLogin.setBounds(252, 96, 90, 27);
+		btnLogin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		panel.add(btnLogin);
 		
 		JButton btnNewmembership = new JButton("\uD68C\uC6D0\uAC00\uC785"); // 회원가입 버튼 클릭시  회원가입창 뜨게함
@@ -113,5 +120,9 @@ public class LoginUI extends JFrame {
 		lbl_hub.setFont(new Font("Segoe Print", Font.BOLD, 25));
 		lbl_hub.setBounds(53, 40, 301, 33);
 		panel.add(lbl_hub);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(120, 130, 116, 24);
+		panel.add(passwordField);
 	}
 }
