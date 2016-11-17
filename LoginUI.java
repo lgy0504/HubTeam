@@ -6,33 +6,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
-import javax.swing.JPasswordField;
+import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 
-public class LoginUI extends JFrame {
+public class emoticonUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField ID_textField;
-	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginUI frame = new LoginUI();
+					emoticonUI frame = new emoticonUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,85 +38,90 @@ public class LoginUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginUI() {
-		setResizable(false);
-		
-		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		setTitle("Hub chatting program");
+	public emoticonUI() {
+		setTitle("emoticon");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 446, 293);
+		setBounds(100, 100, 332, 224);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(14, 12, 410, 230);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		panel_2.add(panel);
+		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lbl_ID = new JLabel("\uC544\uC774\uB514");
-		lbl_ID.setBounds(53, 101, 62, 18);
-		panel.add(lbl_ID);
-		
-		JLabel lbl_PW = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lbl_PW.setBounds(46, 134, 62, 18);
-		panel.add(lbl_PW);
-		
-		ID_textField = new JTextField();
-		ID_textField.setBounds(120, 97, 116, 24);
-		panel.add(ID_textField);
-		ID_textField.setColumns(10);
-		
-		JButton btnLogin = new JButton("\uB85C\uADF8\uC778"); // ∑Œ±◊¿Œ πˆ∆∞ ≈¨∏ØΩ√ ID_textField, PW_textField ¡§∫∏ πﬁæ∆øÕº≠ DBø° »Æ¿Œ»ƒ ∑Œ±◊¿Œ
-		btnLogin.setBounds(252, 96, 90, 27);
-		btnLogin.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+		JButton btnSmile = new JButton("");
+		//btnSmile.setBorderPainted(false); // Î≤ÑÌäº Í≤ΩÍ≥ÑÏÑ† Ï†úÍ±∞
+		//btnSmile.setFocusPainted(false); //Ìè¨Ïª§Ïä§(ÏÑ†ÌÉùÌñàÎçò Î≤ÑÌäº ÌëúÏãú) Ï†úÍ±∞
+	//	btnSmile.setContentAreaFilled(false);//Î≤ÑÌäºÏòÅÏó≠ Î∞∞Í≤Ω Ï†úÍ±∞
+
+
+		btnSmile.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\1.png"));
+		btnSmile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel.add(btnLogin);
+		panel.add(btnSmile);
 		
-		JButton btnNewmembership = new JButton("\uD68C\uC6D0\uAC00\uC785"); // »∏ø¯∞°¿‘ πˆ∆∞ ≈¨∏ØΩ√  »∏ø¯∞°¿‘√¢ ∂ﬂ∞‘«‘
-		btnNewmembership.setBounds(252, 126, 90, 27);
-		panel.add(btnNewmembership);
+		JButton btnSad = new JButton("");
+		btnSad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
+		btnSad.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\sad.png"));
+		panel.add(btnSad);
 		
-		JLabel lbl_IP = new JLabel("\uC11C\uBC84 \uC544\uC774\uD53C");
-		lbl_IP.setBounds(53, 167, 80, 18);
-		panel.add(lbl_IP);
+		JButton btnAngry = new JButton("Angry");
+		btnAngry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\\uD5E4\uD5F7.png"));
+		btnAngry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		panel.add(btnAngry);
 		
-		JButton btnIP = new JButton("IP \uC785\uB825"); // IP¿‘∑¬πˆ∆∞ ≈¨∏ØΩ√ IP¿‘∑¬√¢ ∂ﬂ∞‘«‘
-		btnIP.setBounds(147, 163, 116, 27);
-		panel.add(btnIP);
+		JButton btnHi = new JButton("");
+		btnHi.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\hihi.png"));
+		panel.add(btnHi);
 		
-		JLabel lbl_hub = new JLabel("Hub Chatting Program");
-		lbl_hub.setForeground(new Color(0, 0, 0));
-		lbl_hub.setFont(new Font("Segoe Print", Font.BOLD, 25));
-		lbl_hub.setBounds(53, 40, 301, 33);
-		panel.add(lbl_hub);
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3);
+		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(120, 130, 116, 24);
-		panel.add(passwordField);
+		
+		
+		JButton btnShy = new JButton("shy");
+		btnShy.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\22.png"));
+		panel_3.add(btnShy);
+		
+		JButton btnLove = new JButton("Love");
+
+		btnLove.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\223.png"));
+		btnLove.setSelectedIcon(null);
+		panel_3.add(btnLove);
+		
+		JButton btnSulk = new JButton("sulk");
+		btnSulk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSulk.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\3.png"));
+		panel_3.add(btnSulk);
+		
+		JButton btnSorry = new JButton("");
+		btnSorry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\5.png"));
+		btnSorry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_3.add(btnSorry);
 	}
+
 }
+
