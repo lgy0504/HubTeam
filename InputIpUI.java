@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JButton;
 
 public class InputIpUI extends JFrame {
 
@@ -61,7 +62,7 @@ public class InputIpUI extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 354, 236);
+		setBounds(100, 100, 354, 225);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,30 +71,34 @@ public class InputIpUI extends JFrame {
 		JLabel lbl_Ip = new JLabel("IP");
 		lbl_Ip.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		lbl_Ip.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_Ip.setBounds(48, 95, 78, 25);
+		lbl_Ip.setBounds(50, 75, 78, 25);
 		contentPane.add(lbl_Ip);
 		
 		textField = new JTextField();
-		textField.setBounds(140, 95, 142, 24);
+		textField.setBounds(142, 75, 142, 24);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel label = new JLabel("\uD3EC\uD2B8\uBC88\uD638");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("±¼¸²", Font.PLAIN, 16));
-		label.setBounds(48, 132, 78, 25);
+		label.setBounds(50, 112, 78, 25);
 		contentPane.add(label);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(140, 132, 142, 24);
+		textField_1.setBounds(142, 112, 142, 24);
 		contentPane.add(textField_1);
 		
 		lblIpPort = new JLabel("IP & Port number");
 		lblIpPort.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIpPort.setForeground(Color.BLACK);
 		lblIpPort.setFont(new Font("Segoe Print", Font.BOLD, 25));
-		lblIpPort.setBounds(14, 30, 300, 33);
+		lblIpPort.setBounds(14, 25, 300, 33);
 		contentPane.add(lblIpPort);
+		
+		JButton btninput = new JButton("\uC785\uB825");
+		btninput.setBounds(127, 149, 100, 27);
+		contentPane.add(btninput);
 	}
 }
