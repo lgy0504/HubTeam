@@ -47,6 +47,7 @@ public class RestRoomUI extends JFrame {
 	 * Create the frame.
 	 */
 	public RestRoomUI() {
+		setResizable(false);
 		setTitle("Hub Chatting Program");
 		
 		/*try {
