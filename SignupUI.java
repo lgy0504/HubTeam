@@ -41,7 +41,7 @@ public class SignupUI extends JFrame {
 	 * Create the frame.
 	 */
 	public SignupUI() {
-		
+		setResizable(false);
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 		} catch (ClassNotFoundException e) {
@@ -90,7 +90,7 @@ public class SignupUI extends JFrame {
 		panel.add(textField_PW);
 		textField_PW.setColumns(10);
 		
-		JButton btnNew = new JButton("\uD68C\uC6D0\uAC00\uC785"); //È¸¿ø°¡ÀÔ ¹öÆ° Å¬¸¯½Ã textField_ID, textField_PW Á¤º¸ DBÀúÀå ?
+		JButton btnNew = new JButton("\uD68C\uC6D0\uAC00\uC785"); //íšŒì›ê°€ì… ë²„íŠ¼ í´ë¦­ì‹œ textField_ID, textField_PW ì •ë³´ DBì €ì¥ ?
 		btnNew.setBounds(148, 161, 105, 27);
 		panel.add(btnNew);
 		
