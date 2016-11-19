@@ -1,128 +1,78 @@
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
+import java.awt.*;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class Login extends JFrame {
 
 	Connection conn = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
-	JButton btnLogin;
-	JButton btnSignUp;
-	JPanel contentPane;
-	JTextField ID_textField;
-	JTextField PW_textField;
+	JButton btnLogin, btnSignUp;
+	JTextField textID, textPW;
 
 	public static Login frame;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		new Login();
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Login() {
-		JPanel p1 = new JPanel();
-
-		setTitle("Hub chatting program");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 446, 293);
-		contentPane = new JPanel();
+		this.setTitle("Hub chatting Test");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 446, 293);
+		this.setVisible(true);
+		
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		setResizable(false);
+		this.setContentPane(contentPane);
+		this.setResizable(false);
 		contentPane.setLayout(null);
+		
+		JPanel jPanel = new JPanel();
+		jPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		jPanel.setBounds(14, 12, 410, 230);
+		jPanel.setLayout(null);
+		contentPane.add(jPanel);
+		
+		JLabel ID = new JLabel("아이디");
+		ID.setBounds(53, 100, 62, 18);
+		jPanel.add(ID);
 
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(14, 12, 410, 230);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JLabel PW = new JLabel("비밀번호");
+		PW.setBounds(46, 130, 62, 18);
+		jPanel.add(PW);
 
-		JLabel lbl_ID = new JLabel("아이디");
-		lbl_ID.setBounds(53, 100, 62, 18);
-		panel.add(lbl_ID);
+		textID = new JTextField();
+		textID.setBounds(120, 97, 116, 24);
+		jPanel.add(textID);
+		textID.setColumns(10);
 
-		JLabel lbl_PW = new JLabel("비밀번호");
-		lbl_PW.setBounds(46, 130, 62, 18);
-		panel.add(lbl_PW);
+		textPW = new JTextField();
+		textPW.setBounds(120, 127, 116, 24);
+		jPanel.add(textPW);
+		textPW.setColumns(10);
 
-		ID_textField = new JTextField();
-		ID_textField.setBounds(120, 97, 116, 24);
-		panel.add(ID_textField);
-		ID_textField.setColumns(10);
+		JButton Login = new JButton("로그인");
+		Login.setBounds(252, 96, 90, 27);
+		jPanel.add(Login);
 
-		PW_textField = new JTextField();
-		PW_textField.setBounds(120, 127, 116, 24);
-		panel.add(PW_textField);
-		PW_textField.setColumns(10);
+		JButton SignUp = new JButton("회원가입"); 
+		SignUp.setBounds(252, 126, 90, 27);
+		jPanel.add(SignUp);
 
-		JButton btnLogin = new JButton("로그인");
-		btnLogin.setBounds(252, 126, 90, 27);
-		panel.add(btnLogin);
-		// �α���
-		btnLogin.setBounds(252, 96, 90, 27);
-		panel.add(btnLogin);
+		JLabel IP = new JLabel("서버 아이피");
+		IP.setBounds(53, 167, 80, 18);
+		jPanel.add(IP);
 
-		JButton btnSignUp = new JButton("회원가입"); 
-		btnSignUp.addActionListener(new ButtonListener());
-		btnSignUp.setBounds(252, 126, 90, 27);
-		panel.add(btnSignUp);
+		JButton inputIP = new JButton("IP 입력");
+		inputIP.setBounds(147, 163, 116, 27);
+		jPanel.add(inputIP);
 
-		JLabel lbl_IP = new JLabel("서버 아이피");
-		lbl_IP.setBounds(53, 167, 80, 18);
-		panel.add(lbl_IP);
-
-		JButton btnIP = new JButton("IP 입력");
-		btnIP.setBounds(147, 163, 116, 27);
-		panel.add(btnIP);
-
-		JLabel lbl_hub = new JLabel("Hub Chatting Program");
-		lbl_hub.setForeground(new Color(0, 0, 0));
-		lbl_hub.setFont(new Font("Segoe Print", Font.BOLD, 25));
-		lbl_hub.setBounds(53, 40, 301, 33);
-		panel.add(lbl_hub);
-	}
-
-	class ButtonListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("회원가입")) {
-				System.out.println(e.getActionCommand());
-				// frame.setVisible(false);
-				SignUp signUp = new SignUp();
-			} else if (e.getActionCommand().equals("로그인")) {
-				System.out.println(e.getActionCommand());
-				RestRoomUI cRoomUI = new RestRoomUI();
-			}
-		}
+		JLabel hub = new JLabel("Hub Chatting Program");
+		hub.setForeground(new Color(0, 0, 0));
+		hub.setFont(new Font("Segoe Print", Font.BOLD, 25));
+		hub.setBounds(53, 40, 301, 33);
+		jPanel.add(hub);
 	}
 }
