@@ -9,12 +9,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Login_Execute extends Frame implements ActionListener{
-	
+import javax.swing.JOptionPane;
+
+public class Execute extends Frame implements ActionListener {
+
 	private String url = "jdbc:mysql://localhost:3306/hub?useSSL=false";
-	private String strUser = "root"; 
-	private String strPassword = "1234"; 
-	private String strMySQLDriver = "com.mysql.jdbc.Driver"; 
+	private String strUser = "root";
+	private String strPassword = "1234";
+	private String strMySQLDriver = "com.mysql.jdbc.Driver";
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
@@ -24,188 +26,90 @@ public class Login_Execute extends Frame implements ActionListener{
 	String pw;
 	String name;
 
-	SignUp signup = new SignUp();
 	Login log = new Login();
-	RestRoomUI rest = new RestRoomUI();
+	SignUp signup = new SignUp();
+	Restroom rest = new Restroom();
+	UserData d = new UserData();
+
 	Button ok;
 	Label msg;
 	Dialog info;
 
-	public Login_Execute() {
+	public Execute() {
 
-	try {
-	Class.forName(strMySQLDriver);
-	con = (Connection) DriverManager.getConnection(url, strUser, strPassword);
-	stmt = (Statement) con.createStatement();
-	} catch (Exception b) {
-	System.out.println("db접속완료");
-	}
+		try {
+			Class.forName(strMySQLDriver);
+			con = (Connection) DriverManager.getConnection(url, strUser, strPassword);
+			stmt = (Statement) con.createStatement();
+		} catch (Exception b) {
+			System.out.println("db접속실패");
+		}
 
-	signup.btnNew.addActionListener(this);
-	log.btnSignUp.addActionListener(this);
-	//log.btnLogin.addActionListener(this);
+		log.signUp.addActionListener(this);
+		signup.btnNew.addActionListener(this);
+		log.login.addActionListener(this);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-	Object obj = e.getSource();
-	if (obj.equals(log.btnSignUp)) {
-	signup.setVisible(true);
-	} else if (obj.equals(log.btnLogin)) {
-	loginCheck();
+		Object obj = e.getSource();
+		if (obj.equals(log.signUp)) {
+			log.setVisible(false);
+			signup.setVisible(true);
+		} else if (obj.equals(log.login)) {
+			if(loginCheck())
+				log.setVisible(false);
+			JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
+		} else if (obj.equals(signup.btnNew)) {
+			selectInsert();
+			signup.setVisible(false);
+			log.setVisible(true);
+		}
 	}
-	
-	
-//	rest.label1.setText(name + "로그인.");
-//	rest.setTitle(name + "");
-//	log.setVisible(false);
-//	} else if (obj.equals(rest.button1)) {
-//	showUpdate();
-//	} else if (obj.equals(rest.button2)) {
-//	selectDelete();
-//	} else if (obj.equals(rest.button3)) {
-//	rest.setVisible(false);
-//	log.setVisible(true);
-
-//	clearText();
-
-	} /*else if (obj.equals(signup.btnNew)) {
-	if (signup.btnNew.equals("완료")) {
-	System.out.println("ㅎㅎㅎ");
-	selectInsert();
-	signup.setVisible(false);
-	}}/*}
-	
-
-	private void clearText() {
-
-	log.ID_textField.setText("");
-	log.PW_textField.setText("");
-	signup.textField_ID.setText("");
-	signup.textField_PW.setText("");
-	signup.textField_NAME.setText("");
-	}
-
-
-	private void selectUpdate() {
-
-	UserData d = new UserData();
-	d.id = signup.textField_ID.getText().trim();
-	d.pw = signup.textField_PW.getText().trim();
-	d.name = signup.textField_NAME.getText().trim();
-
-	String sql = "update login set id='" + d.id + "',pw='" + d.pw
-	+ "' where name='" + d.name + "'";
-	try {
-	int rss = stmt.executeUpdate(sql);
-	System.out.println(rss + "      Ʈ");
-
-
-	signup.setVisible(false);
-	} catch (Exception e) {
-	e.printStackTrace(System.out);
-	}
-	}
-
 
 	private void selectInsert() {
-	UserData d = new UserData();
-	d.id = signup.textField_ID.getText().trim();
-	d.pw = signup.textField_PW.getText().trim();
-	d.name = signup.textField_NAME.getText().trim();
-	String sql = "insert into login value('" + d.id + "','" + d.pw + "','"
-	+ d.name + "')";
-	
-	try {
+		UserData d = new UserData();
+		d.id = signup.ID.getText().trim();
+		d.pw = signup.PW.getText().trim();
+		d.name = signup.NAME.getText().trim();
 
-	int rss = stmt.executeUpdate(sql);
+		String sql = "insert into login value('" + d.id + "','" + d.pw + "','" + d.name + "')";
 
-	System.out.println(rss + "    ");
-//	rest.tex1.setText("      Ϸ ");
-	} catch (Exception e) {
-	e.printStackTrace(System.out);
-	}
-	}
-/*
-	void showUpdate() {
-	signup.btn3.setLabel("       ");
-	signup.btn2.setLabel("    ");
-	
-	String name = rest.tex1.getText();
-	String id = signup.tf_id.getText();
-	String pw = signup.tf_pass.getText();
-	String sql = "select * from login where name='" + name + "'";
-	System.out.println(sql);
-	try {
-	rs = stmt.executeQuery(sql);
-	if (rs.next()) {
-	signup.tf_id.setText(rs.getString("id"));
-	signup.tf_pass.setText(rs.getString("pw"));
-	signup.tf_name.setText(rs.getString("name"));
-	System.out.println(rs + "    ");
+		try {
 
-	rest.tex1.setText("                 Ϸ  ");
-	}
-	} catch (Exception e) {
-	rest.tex1.setText("              ߻ ");
-	System.out.println("              ߻  : " + e);
-	}
-	signup.tf_name.setEnabled(false);
-	signup.setVisible(true);
+			int rss = stmt.executeUpdate(sql);
+			System.out.println(rss + "    ");
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
 	}
 
-	void selectDelete() {
+	public boolean loginCheck() {
+		id = log.textID.getText().trim();
+		pw = log.textPW.getText().trim();
 
-	String name = rest.tex1.getText();
-	String sql = "delete from login where name='" + name + "'";
-	System.out.println(sql);
-	try {
+		String query = "SELECT pw,name FROM login where id='" + id + "'";
+		System.out.println(query);
+		try {
+			ResultSet rs = stmt.executeQuery(query);
 
-	int rss = stmt.executeUpdate(sql);
-
-	System.out.println(rss + "    ");
-
-
-	rest.tex1.setText("      Ϸ ");
-
-	} catch (Exception e) {
-	rest.tex1.setText("             ߻ ");
-	System.out.println("             ߻  : " + e);
-	}
-	}// deleteDB
-*/
-	public void loginCheck() {
-	id = log.ID_textField.getText().trim();
-	pw = log.PW_textField.getText().trim();
-
-	String query = "SELECT pw,name FROM login where id='" + id + "'";
-
-	System.out.println(query);
-	try {
-	ResultSet rs = stmt.executeQuery(query);
-
-	if (rs.next()) {
-	name = rs.getString("name");
-
-	if (pw.equals(rs.getString("pw"))) {
-
-	System.out.println("login");
-	rest.setVisible(true);
-
-	}
-
-	}
-
-	} catch (Exception b) {
-	b.printStackTrace();
-	}
+			if (rs.next()) {
+				name = rs.getString("name");
+				if (pw.equals(rs.getString("pw"))) {
+					System.out.println("login");
+					rest.setVisible(true);
+					return true;
+				}
+			}
+		} catch (Exception b) {
+			b.printStackTrace();
+		}return false;
 	}
 
 	public static void main(String[] args) {
-	new Login_Execute();
+		new Execute();
 
 	}
-	} 
-	 
+}

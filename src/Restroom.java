@@ -20,7 +20,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-public class RestRoomUI extends JFrame {
+public class Restroom extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -32,7 +32,7 @@ public class RestRoomUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RestRoomUI frame = new RestRoomUI();
+					Restroom frame = new Restroom();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,25 +44,9 @@ public class RestRoomUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RestRoomUI() {
+	public Restroom() {
 		setResizable(false);
 		setTitle("Hub Chatting Program");
-		
-		/*try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
