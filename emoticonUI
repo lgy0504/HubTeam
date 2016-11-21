@@ -1,4 +1,4 @@
-package kr.ac.sunmoon;
+package Hub;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JTextPane;
 
 public class emoticonUI extends JFrame {
 
@@ -61,9 +62,13 @@ public class emoticonUI extends JFrame {
 	//	btnSmile.setContentAreaFilled(false);//버튼영역 배경 제거
 
 
-		btnSmile.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\1.png"));
+		btnSmile.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\Smiles.gif"));
 		btnSmile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnSmile){
+					//이미지보내기
+				}
 			}
 		});
 		panel.add(btnSmile);
@@ -71,23 +76,39 @@ public class emoticonUI extends JFrame {
 		JButton btnSad = new JButton("");
 		btnSad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnSad){ //버튼이 눌려졌을때
+					//이미지보내기 이벤트작성
+				}
 			}
 		});
 
-		btnSad.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\sad.png"));
+		btnSad.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\sadsad.gif"));
 		panel.add(btnSad);
 		
 		JButton btnAngry = new JButton("Angry");
-		btnAngry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\\uD5E4\uD5F7.png"));
+		btnAngry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\angry.gif"));
 		btnAngry.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnAngry){
+					//이미지보내기
+				}
 			}
 		});
 
 		panel.add(btnAngry);
 		
 		JButton btnHi = new JButton("");
-		btnHi.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\hihi.png"));
+		btnHi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnHi){
+					//이미지보내기
+				}
+			}
+		});
+		btnHi.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\hihi.gif"));
 		panel.add(btnHi);
 		
 		JPanel panel_3 = new JPanel();
@@ -97,30 +118,56 @@ public class emoticonUI extends JFrame {
 		
 		
 		JButton btnShy = new JButton("shy");
-		btnShy.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\22.png"));
+		btnShy.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\sssss.gif"));
 		panel_3.add(btnShy);
+		btnAngry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnShy){
+					//이미지보내기
+				}
+			}
+		});
+		
 		
 		JButton btnLove = new JButton("Love");
 
-		btnLove.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\223.png"));
+		btnLove.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\lovelove.gif"));
 		btnLove.setSelectedIcon(null);
 		panel_3.add(btnLove);
+		btnAngry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnLove){
+					//이미지보내기
+				}
+			}
+		});
 		
 		JButton btnSulk = new JButton("sulk");
 		btnSulk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnSulk){
+					//이미지보내기
+				}
 			}
 		});
-		btnSulk.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\3.png"));
+		btnSulk.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\sulks.gif"));
 		panel_3.add(btnSulk);
 		
 		JButton btnSorry = new JButton("");
-		btnSorry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\5.png"));
+		btnSorry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\\uCE74\uD1A1\uC774\uBBF8\uC9C0\uB2E4\uC2DC\\sorrysorry.gif"));
 		btnSorry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Object obj = e.getSource();
+				if((JButton)obj == btnSorry){
+					//이미지보내기
+				}
 			}
 		});
 		panel_3.add(btnSorry);
 	}
 
 }
+
