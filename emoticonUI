@@ -22,6 +22,7 @@ public class emoticonUI extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,9 +39,9 @@ public class emoticonUI extends JFrame {
 	 * Create the frame.
 	 */
 	public emoticonUI() {
-		setTitle("\uC774\uBAA8\uD2F0\uCF58");
+		setTitle("emoticon");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 257);
+		setBounds(100, 100, 332, 224);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,30 +55,72 @@ public class emoticonUI extends JFrame {
 		panel_2.add(panel);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JButton btnSmile = new JButton("Smile");
-		btnSmile.setIcon(new ImageIcon("C:\\Users\\\uC774\uD604\uC6B0\\Desktop\\\uCEA1\uCC98.PNG"));
+		JButton btnSmile = new JButton("");
+		//btnSmile.setBorderPainted(false); // 버튼 경계선 제거
+		//btnSmile.setFocusPainted(false); //포커스(선택했던 버튼 표시) 제거
+	//	btnSmile.setContentAreaFilled(false);//버튼영역 배경 제거
+
+
+		btnSmile.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\1.png"));
+		btnSmile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		panel.add(btnSmile);
 		
-		JButton btnSad = new JButton("Sad");
-		btnSad.setIcon(new ImageIcon("C:\\Users\\\uC774\uD604\uC6B0\\Desktop\\images.jpg"));
+		JButton btnSad = new JButton("");
+		btnSad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
+		btnSad.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\sad.png"));
 		panel.add(btnSad);
 		
 		JButton btnAngry = new JButton("Angry");
-		btnAngry.setIcon(new ImageIcon("C:\\Users\\\uC774\uD604\uC6B0\\Desktop\\images (1).jpg"));
+		btnAngry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\\uD5E4\uD5F7.png"));
+		btnAngry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
 		panel.add(btnAngry);
+		
+		JButton btnHi = new JButton("");
+		btnHi.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\hihi.png"));
+		panel.add(btnHi);
 		
 		JPanel panel_3 = new JPanel();
 		panel_2.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JButton btnNewButton_1 = new JButton("embarrassed");
-		panel_3.add(btnNewButton_1);
 		
-		JButton btnNewButton_4 = new JButton("Love");
-		panel_3.add(btnNewButton_4);
 		
-		JButton btnNewButton = new JButton("sulk");
-		panel_3.add(btnNewButton);
+		JButton btnShy = new JButton("shy");
+		btnShy.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\22.png"));
+		panel_3.add(btnShy);
+		
+		JButton btnLove = new JButton("Love");
+
+		btnLove.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\223.png"));
+		btnLove.setSelectedIcon(null);
+		panel_3.add(btnLove);
+		
+		JButton btnSulk = new JButton("sulk");
+		btnSulk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSulk.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\3.png"));
+		panel_3.add(btnSulk);
+		
+		JButton btnSorry = new JButton("");
+		btnSorry.setIcon(new ImageIcon("C:\\Users\\Kim\\Desktop\\Desktop\\5.png"));
+		btnSorry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_3.add(btnSorry);
 	}
 
 }
