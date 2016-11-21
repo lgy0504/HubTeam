@@ -1,5 +1,4 @@
-package Hub;
-
+package kr.ac.sunmoon;			
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
