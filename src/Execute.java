@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -63,13 +64,16 @@ public class Execute extends Frame implements ActionListener {
 				log.setVisible(false);
 			JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
 		} else if (obj.equals(signup.btnNew)) {
-			selectInsert();
-			signup.setVisible(false);
-			log.setVisible(true);
+			if(selectInsert())
+			{
+				signup.setVisible(false);
+				log.setVisible(true);
+			}else
+				JOptionPane.showMessageDialog(null, "This ID is already used",id,JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	private void selectInsert() {
+	private boolean selectInsert() {
 		UserData d = new UserData();
 		d.id = signup.ID.getText().trim();
 		d.pw = signup.PW.getText().trim();
@@ -81,9 +85,10 @@ public class Execute extends Frame implements ActionListener {
 
 			int rss = stmt.executeUpdate(sql);
 			System.out.println(rss + "    ");
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
-		}
+		}return false;
 	}
 
 	public boolean loginCheck() {
