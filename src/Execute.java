@@ -57,15 +57,15 @@ public class Execute extends Frame implements ActionListener {
 
 		Object obj = e.getSource();
 		if (obj.equals(log.signUp)) {
-			log.setVisible(false);
+			//log.setVisible(false);
 			signup.setVisible(true);
 		} else if (obj.equals(log.login)) {
 			if(loginCheck())
 				log.setVisible(false);
-			JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
+			else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
 		} else if (obj.equals(signup.btnNew)) {
 			if(selectInsert())
-			{
+			{	JOptionPane.showMessageDialog(null, "SignUp is complete successfully","sign up complete",JOptionPane.INFORMATION_MESSAGE);
 				signup.setVisible(false);
 				log.setVisible(true);
 			}else
