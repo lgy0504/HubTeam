@@ -22,9 +22,9 @@ import javax.swing.border.TitledBorder;
 
 public class Restroom extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField;
-
+	JPanel contentPane;
+	JTextField textField;
+	JLabel lbl_IpView, lbl_IdView,lbl_NickView;
 	public Restroom() {
 		setResizable(false);
 		setTitle("Hub Chatting Program");
@@ -109,15 +109,15 @@ public class Restroom extends JFrame {
 		lbl_Nickname.setBounds(0, 129, 57, 15);
 		MyinfoPane.add(lbl_Nickname);
 		
-		JLabel lbl_IpView = new JLabel("");
+		lbl_IpView = new JLabel("");
 		lbl_IpView.setBounds(57, 49, 102, 15);
 		MyinfoPane.add(lbl_IpView);
 		
-		JLabel lbl_IdView = new JLabel("");
+		lbl_IdView = new JLabel("");
 		lbl_IdView.setBounds(57, 89, 102, 15);
 		MyinfoPane.add(lbl_IdView);
 		
-		JLabel lbl_NickView = new JLabel("");
+		lbl_NickView = new JLabel("");
 		lbl_NickView.setBounds(57, 129, 102, 15);
 		MyinfoPane.add(lbl_NickView);
 		

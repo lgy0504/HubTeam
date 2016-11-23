@@ -60,8 +60,11 @@ public class Execute extends Frame implements ActionListener {
 		if (obj.equals(log.signUp)) {
 			signup.setVisible(true);
 		} else if (obj.equals(log.login)) {
-			if(loginCheck())
+			if(loginCheck()){
 				log.setVisible(false);
+				//ip is not complete 
+				rest.lbl_IdView.setText(id);
+				rest.lbl_NickView.setText(name);}
 			else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
 		} else if (obj.equals(signup.btnNew)) {
 			if(selectInsert())
