@@ -8,7 +8,7 @@ public class Login extends JFrame {
 	Connection conn = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
-	JButton login, signUp;
+	JButton login, signUp, inputIP;
 	JTextField textID, textPW;
 
 	public Login() {
@@ -28,11 +28,11 @@ public class Login extends JFrame {
 		jPanel.setLayout(null);
 		contentPane.add(jPanel);
 		
-		JLabel ID = new JLabel("ì•„ì´ë””");
+		JLabel ID = new JLabel("¾ÆÀÌµğ");
 		ID.setBounds(53, 100, 62, 18);
 		jPanel.add(ID);
 
-		JLabel PW = new JLabel("ë¹„ë°€ë²ˆí˜¸");
+		JLabel PW = new JLabel("ºñ¹Ğ¹øÈ£");
 		PW.setBounds(46, 130, 62, 18);
 		jPanel.add(PW);
 
@@ -46,19 +46,19 @@ public class Login extends JFrame {
 		jPanel.add(textPW);
 		textPW.setColumns(10);
 
-		login = new JButton("ë¡œê·¸ì¸");
+		login = new JButton("·Î±×ÀÎ");
 		login.setBounds(252, 96, 90, 27);
 		jPanel.add(login);
 
-		signUp = new JButton("íšŒì›ê°€ì…"); 
+		signUp = new JButton("È¸¿ø°¡ÀÔ"); 
 		signUp.setBounds(252, 126, 90, 27);
 		jPanel.add(signUp);
 
-		JLabel IP = new JLabel("ì„œë²„ ì•„ì´í”¼");
+		JLabel IP = new JLabel("¼­¹ö ¾ÆÀÌÇÇ");
 		IP.setBounds(53, 167, 80, 18);
 		jPanel.add(IP);
 
-		JButton inputIP = new JButton("IP ì…ë ¥");
+		inputIP = new JButton("IP ÀÔ·Â");
 		inputIP.setBounds(147, 163, 116, 27);
 		jPanel.add(inputIP);
 

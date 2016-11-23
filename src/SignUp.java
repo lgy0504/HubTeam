@@ -22,12 +22,12 @@ public class SignUp extends JFrame {
 	
 	public SignUp() {
 		
-		setTitle("Hub Chatting SignUp");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 00, 440, 303);
+		this.setTitle("Hub Chatting SignUp");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 00, 440, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		this.setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -36,15 +36,15 @@ public class SignUp extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lbl_ID = new JLabel("ÏïÑÏù¥Îîî");
+		JLabel lbl_ID = new JLabel("æ∆¿Ãµ");
 		lbl_ID.setBounds(99, 79, 62, 18);
 		panel.add(lbl_ID);
 		
-		JLabel lbl_PW = new JLabel("ÎπÑÎ∞ÄÎ≤àÌò∏");
+		JLabel lbl_PW = new JLabel("∫Òπ–π¯»£");
 		lbl_PW.setBounds(99, 109, 62, 18);
 		panel.add(lbl_PW);
 		
-		JLabel lbl_NAME = new JLabel("Ïù¥Î¶Ñ");
+		JLabel lbl_NAME = new JLabel("¿Ã∏ß");
 		lbl_NAME.setBounds(99, 139, 62, 18);
 		panel.add(lbl_NAME);
 		
@@ -63,7 +63,7 @@ public class SignUp extends JFrame {
 		panel.add(NAME);
 		NAME.setColumns(10);
 	
-		btnNew = new JButton("ÏôÑÎ£å"); 
+		btnNew = new JButton("øœ∑·"); 
 		btnNew.setBounds(148, 189, 105, 27);
 		panel.add(btnNew);
 		

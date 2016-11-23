@@ -27,29 +27,30 @@ public class Execute extends Frame implements ActionListener {
 	String pw;
 	String name;
 
+	
 	Login log = new Login();
+	InputIP ip = new InputIP();
 	SignUp signup = new SignUp();
 	Restroom rest = new Restroom();
 	UserData d = new UserData();
-
+	
 	Button ok;
 	Label msg;
 	Dialog info;
 
 	public Execute() {
-
 		try {
 			Class.forName(strMySQLDriver);
 			con = (Connection) DriverManager.getConnection(url, strUser, strPassword);
 			stmt = (Statement) con.createStatement();
 		} catch (Exception b) {
-			System.out.println("dbÏ†ëÏÜçÏã§Ìå®");
+			System.out.println("dbø¨∞·Ω«∆–");
 		}
-
+		
 		log.signUp.addActionListener(this);
 		signup.btnNew.addActionListener(this);
 		log.login.addActionListener(this);
-
+		log.inputIP.addActionListener(this);
 	}
 
 	@Override
@@ -57,7 +58,6 @@ public class Execute extends Frame implements ActionListener {
 
 		Object obj = e.getSource();
 		if (obj.equals(log.signUp)) {
-			//log.setVisible(false);
 			signup.setVisible(true);
 		} else if (obj.equals(log.login)) {
 			if(loginCheck())
@@ -70,6 +70,9 @@ public class Execute extends Frame implements ActionListener {
 				log.setVisible(true);
 			}else
 				JOptionPane.showMessageDialog(null, "This ID is already used",id,JOptionPane.ERROR_MESSAGE);
+		} else if(obj.equals(log.inputIP)){
+			System.out.println("s");
+			ip.setVisible(true);
 		}
 	}
 
