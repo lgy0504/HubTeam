@@ -13,7 +13,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class Execute extends Frame implements ActionListener {
-
+	
 	private String url = "jdbc:mysql://localhost:3306/hub?useSSL=false";
 	private String strUser = "root";
 	private String strPassword = "1234";
@@ -67,34 +67,37 @@ public class Execute extends Frame implements ActionListener {
 				rest.lbl_NickView.setText(name);}
 			else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
 		} else if (obj.equals(signup.btnNew)) {
-			if(selectInsert())
+			if(selectInsert()==1){
+				JOptionPane.showMessageDialog(null, "There is blank, check your id,pw,name",id,JOptionPane.ERROR_MESSAGE);
+			}
+			else if(selectInsert()==2)
 			{	JOptionPane.showMessageDialog(null, "SignUp is complete successfully","sign up complete",JOptionPane.INFORMATION_MESSAGE);
 				signup.setVisible(false);
 				log.setVisible(true);
 			}else
 				JOptionPane.showMessageDialog(null, "This ID is already used",id,JOptionPane.ERROR_MESSAGE);
 		} else if(obj.equals(log.inputIP)){
-			System.out.println("s");
 			ip.setVisible(true);
 		}
 	}
 
-	private boolean selectInsert() {
+	private int selectInsert() {
 		UserData d = new UserData();
 		d.id = signup.ID.getText().trim();
 		d.pw = signup.PW.getText().trim();
 		d.name = signup.NAME.getText().trim();
 
 		String sql = "insert into login value('" + d.id + "','" + d.pw + "','" + d.name + "')";
-
+		
 		try {
-
+			if(d.id.equals("") || d.pw.equals("") || d.name.equals("")){
+				return 1;}
 			int rss = stmt.executeUpdate(sql);
 			System.out.println(rss + "    ");
-			return true;
+			return 2;
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
-		}return false;
+		}return 3;
 	}
 
 	public boolean loginCheck() {
