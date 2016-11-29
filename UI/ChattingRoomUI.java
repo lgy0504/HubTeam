@@ -17,11 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
-import UI.Login.ButtonListener;
 
 public class ChattingRoomUI extends JFrame {
 
@@ -50,7 +47,7 @@ public class ChattingRoomUI extends JFrame {
 	public ChattingRoomUI() {
 		setResizable(false);
 		
-		try {
+		/*try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -64,7 +61,7 @@ public class ChattingRoomUI extends JFrame {
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 470);
@@ -151,7 +148,7 @@ public class ChattingRoomUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				dispose(); // 뒤로가기
+				dispose();
 				
 			}
 		});
@@ -160,8 +157,8 @@ public class ChattingRoomUI extends JFrame {
 		btnEmoticon.addActionListener(new ButtonListener());
 		panel_1.add(btnEmoticon, BorderLayout.WEST);
 		panel_1.add(btnExit, BorderLayout.EAST);
+		
 	}	
-	
 	class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -169,10 +166,6 @@ public class ChattingRoomUI extends JFrame {
 				System.out.println(e.getActionCommand());
 				//frame.setVisible(false);
 				emoticonUI emoticon = new emoticonUI();
-			}
-			else
-			{
-				
 			}
 		}
 	}

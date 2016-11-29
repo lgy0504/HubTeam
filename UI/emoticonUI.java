@@ -1,22 +1,20 @@
 package UI;			
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JTextPane;
 
 public class emoticonUI extends JFrame {
 	
 	private JPanel contentPane;
+	public static emoticonUI frame;
 
 	/**
 	 * Launch the application.
@@ -26,7 +24,7 @@ public class emoticonUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					emoticonUI frame = new emoticonUI();
+					frame = new emoticonUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +39,7 @@ public class emoticonUI extends JFrame {
 	public emoticonUI() {
 		setResizable(false);
 		setTitle("emoticon");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 332, 224);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -159,6 +157,7 @@ public class emoticonUI extends JFrame {
 			}
 		});
 		panel_3.add(btnSorry);
+		setVisible(true);
 	}
 
 }
