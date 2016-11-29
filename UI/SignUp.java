@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -78,7 +80,7 @@ public class SignUp extends JFrame {
 		textField_PW.setColumns(10);
 		
 		JButton btnNew = new JButton("회원가입"); //회원가입 버튼 클릭시 textField_ID, textField_PW 정보 DB저장 ?
-		btnNew.setBounds(148, 146, 105, 27);
+		btnNew.setBounds(85, 146, 105, 27);
 		panel.add(btnNew);
 		
 		JLabel lblHubChattingMembership = new JLabel("Hub Chatting Membership");
@@ -86,6 +88,18 @@ public class SignUp extends JFrame {
 		lblHubChattingMembership.setFont(new Font("Segoe Print", Font.BOLD, 25));
 		lblHubChattingMembership.setBounds(38, 12, 340, 40);
 		panel.add(lblHubChattingMembership);
+		
+		JButton btnBack = new JButton("\uB4A4\uB85C\uAC00\uAE30");
+		btnBack.setBounds(204, 146, 105, 27);
+		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				
+			}
+		});
 		
 		setVisible(true);
 	}
