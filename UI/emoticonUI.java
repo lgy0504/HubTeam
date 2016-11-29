@@ -1,4 +1,4 @@
-package kr.ac.sunmoon;			
+package UI;			
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -65,7 +65,7 @@ public class emoticonUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Object obj = e.getSource();
 				if((JButton)obj == btnSmile){
-					//�씠誘몄�蹂대궡湲�
+					//�씠誘몄�蹂??궡湲�?
 				}
 			}
 		});

@@ -21,6 +21,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import UI.Login.ButtonListener;
+
 public class ChattingRoomUI extends JFrame {
 
 	private JPanel contentPane;
@@ -149,9 +151,29 @@ public class ChattingRoomUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				dispose(); // 뒤로가기
 				
 			}
 		});
-		panel_1.add(btnExit);
+		
+		JButton btnEmoticon = new JButton("\uC774\uBAA8\uD2F0\uCF58");
+		btnEmoticon.addActionListener(new ButtonListener());
+		panel_1.add(btnEmoticon, BorderLayout.WEST);
+		panel_1.add(btnExit, BorderLayout.EAST);
 	}	
+	
+	class ButtonListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand().equals("\uC774\uBAA8\uD2F0\uCF58")) {
+				System.out.println(e.getActionCommand());
+				//frame.setVisible(false);
+				emoticonUI emoticon = new emoticonUI();
+			}
+			else
+			{
+				
+			}
+		}
+	}
 }
