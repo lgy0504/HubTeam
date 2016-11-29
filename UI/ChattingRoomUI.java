@@ -1,4 +1,4 @@
-package kr.ac.sunmoon;
+package UI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
