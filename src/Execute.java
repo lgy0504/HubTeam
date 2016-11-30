@@ -4,11 +4,22 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
@@ -18,6 +29,22 @@ public class Execute extends Frame implements ActionListener {
 	private String strUser = "root";
 	private String strPassword = "1234";
 	private String strMySQLDriver = "com.mysql.jdbc.Driver";
+	
+	private Socket socket;
+	private String ip;
+	private int port=1;
+	private InputStream is;
+	private OutputStream os;
+	private DataInputStream dis;
+	private DataOutputStream dos;
+	
+	
+	Vector user_list = new Vector();
+	Vector room_list = new Vector();
+	StringTokenizer st;
+	
+	private String My_Room;
+	
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
@@ -29,10 +56,11 @@ public class Execute extends Frame implements ActionListener {
 
 	
 	Login log = new Login();
-	InputIP ip = new InputIP();
+	InputIP ipIP = new InputIP();
 	SignUp signup = new SignUp();
 	Restroom rest = new Restroom();
 	UserData d = new UserData();
+	ChattingRoomUI chatroom = new ChattingRoomUI();
 	
 	Button ok;
 	Label msg;
@@ -51,33 +79,89 @@ public class Execute extends Frame implements ActionListener {
 		signup.btnNew.addActionListener(this);
 		log.login.addActionListener(this);
 		log.inputIP.addActionListener(this);
+		rest.makeroombtn.addActionListener(this);
+		rest.joinroombtn.addActionListener(this);
+		chatroom.btnchat.addActionListener(this);
+		
+		chatroom.textField.addKeyListener
+	      (new KeyAdapter() {
+	         public void keyPressed(KeyEvent e) {
+	           int key = e.getKeyCode();
+	           if (key == KeyEvent.VK_ENTER) {
+	        	   send_message("Chatting/"+My_Room+"/"+chatroom.textField.getText().trim());
+	   			chatroom.textField.setText("");
+	   			chatroom.textField.requestFocus();
+	              }
+	           }
+	         }
+	      );
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		Object obj = e.getSource();
-		if (obj.equals(log.signUp)) {
+		if (obj.equals(log.signUp)) 
+		{
 			signup.setVisible(true);
-		} else if (obj.equals(log.login)) {
-			if(loginCheck()){
+		} else if (obj.equals(log.login)) 
+		{
+			if(loginCheck())
+			{
 				log.setVisible(false);
-				//ip is not complete 
+				rest.lbl_IpView.setText("127.0.0.1");
 				rest.lbl_IdView.setText(id);
-				rest.lbl_NickView.setText(name);}
+				rest.lbl_NickView.setText(name);
+				
+				ip = "127.0.0.1";
+				port = 7777;
+				//Integer.parseInt(port_tf.getText().trim());
+				id = log.textID.getText().trim();
+				Network();
+				}
 			else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
-		} else if (obj.equals(signup.btnNew)) {
+		}
+		else if (obj.equals(signup.btnNew)) 
+		{
 			if(selectInsert()==2)
 			{	JOptionPane.showMessageDialog(null, "SignUp is complete successfully","sign up complete",JOptionPane.INFORMATION_MESSAGE);
 				signup.setVisible(false);
 				log.setVisible(true);
-			}else if(selectInsert()==1){
+			}else if(selectInsert()==1)
+			{
 				JOptionPane.showMessageDialog(null, "There is blank, check your id,pw,name",id,JOptionPane.ERROR_MESSAGE);
 			}else
 				JOptionPane.showMessageDialog(null, "This ID is already used",id,JOptionPane.ERROR_MESSAGE);
 		} else if(obj.equals(log.inputIP)){
-			ip.setVisible(true);
+			ipIP.setVisible(true);
 		}
+		else if(e.getSource() == rest.joinroombtn)
+		{
+			String JoinRoom = (String)rest.Room_list.getSelectedValue();
+			
+			send_message("JoinRoom/"+JoinRoom);
+			
+			System.out.println("방 참여 버튼 클릭");
+		}else if(e.getSource() == rest.makeroombtn)
+		{
+			String roomname = JOptionPane.showInputDialog("방 이름");
+			if(roomname != null)
+			{
+				send_message("CreateRoom/"+roomname);
+			}
+			System.out.println("방 만들기 버튼 클릭");
+		}else if(e.getSource() == chatroom.btnchat)
+		{
+			System.out.println("dfdfd");
+			send_message("Chatting/"+My_Room+"/"+chatroom.textField.getText().trim());
+			chatroom.textField.setText("");
+			chatroom.textField.requestFocus();
+			//chatting+방이름+내용
+			System.out.println("전송 버튼 클릭");
+			
+		}
+		
 	}
 
 	private int selectInsert() {
@@ -120,6 +204,153 @@ public class Execute extends Frame implements ActionListener {
 		} catch (Exception b) {
 			b.printStackTrace();
 		}return false;
+	}
+	private void Network()
+	{
+		try {
+			socket = new Socket(ip, port);
+			
+			if(socket!= null)
+			{
+				Connection();
+			}
+		} catch (UnknownHostException e) {
+			
+			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);;
+		} catch (IOException e) {
+			
+			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void Connection()
+	{
+		try{
+			is = socket.getInputStream();
+			dis = new DataInputStream(is);
+		
+			os = socket.getOutputStream();
+			dos = new DataOutputStream(os);
+		}catch(IOException e){
+			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);
+			
+		}//stream설정 끝
+		
+		send_message(id);
+		user_list.add(id);
+
+		Thread th = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(true)
+				{
+					try {
+						String msg = dis.readUTF();//메세지 수신
+						System.out.println("서버로부터 수신된 메시지 : "+msg);
+						
+						inmessage(msg);
+					} catch (IOException e) {
+						try{
+							os.close();
+							is.close();
+							dos.close();
+							dis.close();
+							socket.close();
+							JOptionPane.showMessageDialog(null, "서버와 접속 끊어짐","알림",JOptionPane.ERROR_MESSAGE);
+						}catch(IOException e2){}
+						break;
+					}
+					
+				}
+				
+			}
+		});
+		th.start();
+	}
+	
+	private void inmessage(String str)//서버로부터 들어오는 모든 메세지
+	{
+		st = new StringTokenizer(str, "/");
+		
+		String protocol = st.nextToken();
+		String Message = st.nextToken();
+		
+		System.out.println("프로토콜 : " + protocol);
+		System.out.println("내용 : "+Message);
+		
+		if(protocol.equals("NewUser"))//새로운 접속자
+		{
+			user_list.add(Message);
+		}
+		else if(protocol.equals("OldUser"))
+		{
+			user_list.add(Message);
+
+		}
+		else if(protocol.equals("Note"))
+		{
+			String note = st.nextToken();
+			
+			System.out.println(Message+"사용자로부터 온 쪽지"+note);
+			JOptionPane.showMessageDialog(null, note, Message+"님으로 부터의 쪽지",JOptionPane.CLOSED_OPTION);
+		}
+		else if(protocol.equals("user_list_update"))
+		{
+			rest.User_list.setListData(user_list);
+		}
+		else if(protocol.equals("CreateRoom"))
+		{
+			My_Room = Message;
+			chatroom.setVisible(true);
+		}
+		else if(protocol.equals("CreateRoomFail"))
+		{
+			JOptionPane.showMessageDialog(null, "방 만들기 실패","알림",JOptionPane.ERROR_MESSAGE);
+		}
+		else if(protocol.equals("New_Room"))
+		{
+			room_list.add(Message);
+			rest.Room_list.setListData(room_list);
+		}
+		else if(protocol.equals("Chatting"))
+		{
+			String msg = st.nextToken();
+			chatroom.textArea.append(Message+" : "+msg+"\n");
+			
+		}
+		
+		else if(protocol.equals("OldRoom"))
+		{
+			room_list.add(Message);
+		}
+		else if(protocol.equals("room_list_update"))
+		{
+			rest.Room_list.setListData(room_list);
+		}
+		else if(protocol.equals("JoinRoom"))
+		{
+			My_Room = Message;
+			rest.setVisible(false);
+			chatroom.setVisible(true);
+			JOptionPane.showMessageDialog(null, "채팅방에 입장했습니다.","알림",JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(protocol.equals("User_out"))
+		{
+			user_list.remove(Message);
+			
+		}
+		
+	}
+	
+	
+	private void send_message(String str)
+	{
+		try {
+			dos.writeUTF(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
