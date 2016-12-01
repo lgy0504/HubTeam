@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 
 public class Restroom extends JFrame {
 
+	
 	JButton makeroombtn = new JButton("\uBC29 \uB9CC\uB4E4\uAE30");
 	JButton joinroombtn = new JButton("\uBC29 \uB4E4\uC5B4\uAC00\uAE30");
 	JPanel contentPane;
@@ -29,7 +30,6 @@ public class Restroom extends JFrame {
 	JLabel lbl_IpView, lbl_IdView,lbl_NickView;
 	JList Room_list = new JList();//전체 방목록
 	JList User_list = new JList();//전체 접속자
-	
 	public Restroom() {
 		setResizable(false);
 		setTitle("Hub Chatting Program");
@@ -68,17 +68,16 @@ public class Restroom extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		roomlistPane.add(scrollPane, BorderLayout.CENTER);
 		
-		JList roomlist = new JList();
-		scrollPane.setViewportView(roomlist);
+		scrollPane.setViewportView(Room_list);
 		
 		JPanel btnpanel = new JPanel();
 		roomlistPane.add(btnpanel, BorderLayout.SOUTH);
 		btnpanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton makeroombtn = new JButton("\uBC29 \uB9CC\uB4E4\uAE30");
+		
 		btnpanel.add(makeroombtn);
 		
-		JButton joinroombtn = new JButton("\uBC29 \uB4E4\uC5B4\uAC00\uAE30");
+		
 		btnpanel.add(joinroombtn);
 		
 		JPanel UserPane = new JPanel();
@@ -90,8 +89,7 @@ public class Restroom extends JFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		UserPane.add(scrollPane_1, BorderLayout.CENTER);
 		
-		JList userlist = new JList();
-		scrollPane_1.setViewportView(userlist);
+		scrollPane_1.setViewportView(User_list);
 		
 		JPanel MyinfoPane = new JPanel();
 		MyinfoPane.setLayout(null);

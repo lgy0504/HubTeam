@@ -32,7 +32,7 @@ public class Execute extends Frame implements ActionListener {
 	
 	private Socket socket;
 	private String ip;
-	private int port=1;
+	private int port;
 	private InputStream is;
 	private OutputStream os;
 	private DataInputStream dis;
@@ -61,6 +61,7 @@ public class Execute extends Frame implements ActionListener {
 	Restroom rest = new Restroom();
 	UserData d = new UserData();
 	ChattingRoomUI chatroom = new ChattingRoomUI();
+	Server server = new Server();
 	
 	Button ok;
 	Label msg;
@@ -82,6 +83,7 @@ public class Execute extends Frame implements ActionListener {
 		rest.makeroombtn.addActionListener(this);
 		rest.joinroombtn.addActionListener(this);
 		chatroom.btnchat.addActionListener(this);
+		ipIP.btninput.addActionListener(this);
 		
 		chatroom.textField.addKeyListener
 	      (new KeyAdapter() {
@@ -107,20 +109,35 @@ public class Execute extends Frame implements ActionListener {
 			signup.setVisible(true);
 		} else if (obj.equals(log.login)) 
 		{
-			if(loginCheck())
+			
+			if(ipIP.textField.getText().length()==0)
 			{
-				log.setVisible(false);
-				rest.lbl_IpView.setText("127.0.0.1");
-				rest.lbl_IdView.setText(id);
-				rest.lbl_NickView.setText(name);
-				
-				ip = "127.0.0.1";
-				port = 7777;
+				JOptionPane.showMessageDialog(null, "IP를 입력해주세요","login error",JOptionPane.ERROR_MESSAGE);
+				ipIP.textField.requestFocus();
+			}
+			else if(ipIP.textField_1.getText().length()==0)
+			{
+				JOptionPane.showMessageDialog(null, "Port번호를 입력해주세요","login error",JOptionPane.ERROR_MESSAGE);
+				ipIP.textField_1.requestFocus();
+			}
+			else 
+			{
+				if(loginCheck())
+				{
+					log.setVisible(false);
+					rest.lbl_IpView.setText(ipIP.textField.getText().trim());
+					rest.lbl_IdView.setText(id);
+					rest.lbl_NickView.setText(name);
+					
+					ip = ipIP.textField.getText().trim();
+						//"127.0.0.1";
+				port = Integer.parseInt(ipIP.textField_1.getText().trim());
 				//Integer.parseInt(port_tf.getText().trim());
 				id = log.textID.getText().trim();
-				Network();
-				}
-			else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
+				Network();	
+				}else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
+				
+			}
 		}
 		else if (obj.equals(signup.btnNew)) 
 		{
@@ -133,7 +150,8 @@ public class Execute extends Frame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "There is blank, check your id,pw,name",id,JOptionPane.ERROR_MESSAGE);
 			}else
 				JOptionPane.showMessageDialog(null, "This ID is already used",id,JOptionPane.ERROR_MESSAGE);
-		} else if(obj.equals(log.inputIP)){
+		} else if(obj.equals(log.inputIP))
+		{
 			ipIP.setVisible(true);
 		}
 		else if(e.getSource() == rest.joinroombtn)
@@ -153,13 +171,13 @@ public class Execute extends Frame implements ActionListener {
 			System.out.println("방 만들기 버튼 클릭");
 		}else if(e.getSource() == chatroom.btnchat)
 		{
-			System.out.println("dfdfd");
 			send_message("Chatting/"+My_Room+"/"+chatroom.textField.getText().trim());
 			chatroom.textField.setText("");
 			chatroom.textField.requestFocus();
-			//chatting+방이름+내용
 			System.out.println("전송 버튼 클릭");
-			
+		}else if(e.getSource() == ipIP.btninput)
+		{
+			ipIP.setVisible(false);
 		}
 		
 	}

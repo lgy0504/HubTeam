@@ -16,6 +16,7 @@ public class InputIP extends JFrame {
 	 JTextField textField;
 	 JTextField textField_1;
 	 JLabel lblIpPort;
+	 JButton btninput;
 	 
 	public InputIP() {
 		
@@ -64,7 +65,7 @@ public class InputIP extends JFrame {
 		lblIpPort.setForeground(Color.BLACK);
 		lblIpPort.setFont(new Font("Segoe Print", Font.BOLD, 25));
 		
-		JButton btninput = new JButton("\uC785\uB825");
+		btninput = new JButton("\uC785\uB825");
 		btninput.setBounds(138, 139, 61, 27);
 		panel.add(btninput);
 	}
