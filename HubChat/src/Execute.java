@@ -29,7 +29,7 @@ public class Execute extends Frame implements ActionListener {
 	
 	private String url = "jdbc:mysql://localhost:3306/hub?useSSL=false";
 	private String strUser = "root";
-	private String strPassword = "25283122";
+	private String strPassword = "1234";
 	private String strMySQLDriver = "com.mysql.jdbc.Driver";
 	
 	private Socket socket;
