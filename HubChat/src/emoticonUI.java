@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,6 +40,9 @@ public class emoticonUI extends JFrame {
 	public emoticonUI() {
 		setResizable(false);
 		setTitle("emoticon");
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    Image img = toolkit.getImage("Image/Title.PNG");
+	    setIconImage(img);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 332, 224);
 		contentPane = new JPanel();
@@ -79,7 +84,7 @@ public class emoticonUI extends JFrame {
 		btnSad.setIcon(new ImageIcon("image\\sadsad.gif"));
 		panel.add(btnSad);
 		
-		final JButton btnAngry = new JButton("Angry");
+		final JButton btnAngry = new JButton("");
 		btnAngry.setIcon(new ImageIcon("image\\angry.gif"));
 		btnAngry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +114,7 @@ public class emoticonUI extends JFrame {
 		
 		
 		
-		final JButton btnShy = new JButton("shy");
+		final JButton btnShy = new JButton("");
 		btnShy.setIcon(new ImageIcon("image\\sssss.gif"));
 		panel_3.add(btnShy);
 		btnAngry.addActionListener(new ActionListener() {
@@ -121,7 +126,7 @@ public class emoticonUI extends JFrame {
 		});
 		
 		
-		final JButton btnLove = new JButton("Love");
+		final JButton btnLove = new JButton("");
 
 		btnLove.setIcon(new ImageIcon("image\\lovelove.gif"));
 		btnLove.setSelectedIcon(null);
@@ -134,7 +139,7 @@ public class emoticonUI extends JFrame {
 			}
 		});
 		
-		final JButton btnSulk = new JButton("sulk");
+		final JButton btnSulk = new JButton("");
 		btnSulk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object obj = e.getSource();

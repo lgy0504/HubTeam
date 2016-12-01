@@ -22,6 +22,8 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Execute extends Frame implements ActionListener {
 	
@@ -73,7 +75,7 @@ public class Execute extends Frame implements ActionListener {
 			con = (Connection) DriverManager.getConnection(url, strUser, strPassword);
 			stmt = (Statement) con.createStatement();
 		} catch (Exception b) {
-			System.out.println("db연결실패");
+			System.out.println("db�뿰寃곗떎�뙣");
 		}
 		
 		log.signUp.addActionListener(this);
@@ -112,12 +114,12 @@ public class Execute extends Frame implements ActionListener {
 			
 			if(ipIP.textField.getText().length()==0)
 			{
-				JOptionPane.showMessageDialog(null, "IP를 입력해주세요","login error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "IP瑜� �엯�젰�빐二쇱꽭�슂","login error",JOptionPane.ERROR_MESSAGE);
 				ipIP.textField.requestFocus();
 			}
 			else if(ipIP.textField_1.getText().length()==0)
 			{
-				JOptionPane.showMessageDialog(null, "Port번호를 입력해주세요","login error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Port踰덊샇瑜� �엯�젰�빐二쇱꽭�슂","login error",JOptionPane.ERROR_MESSAGE);
 				ipIP.textField_1.requestFocus();
 			}
 			else 
@@ -160,21 +162,21 @@ public class Execute extends Frame implements ActionListener {
 			
 			send_message("JoinRoom/"+JoinRoom);
 			
-			System.out.println("방 참여 버튼 클릭");
+			System.out.println("諛� 李몄뿬 踰꾪듉 �겢由�");
 		}else if(e.getSource() == rest.makeroombtn)
 		{
-			String roomname = JOptionPane.showInputDialog("방 이름");
+			String roomname = JOptionPane.showInputDialog("諛� �씠由�");
 			if(roomname != null)
 			{
 				send_message("CreateRoom/"+roomname);
 			}
-			System.out.println("방 만들기 버튼 클릭");
+			System.out.println("諛� 留뚮뱾湲� 踰꾪듉 �겢由�");
 		}else if(e.getSource() == chatroom.btnchat)
 		{
 			send_message("Chatting/"+My_Room+"/"+chatroom.textField.getText().trim());
 			chatroom.textField.setText("");
 			chatroom.textField.requestFocus();
-			System.out.println("전송 버튼 클릭");
+			System.out.println("�쟾�넚 踰꾪듉 �겢由�");
 		}else if(e.getSource() == ipIP.btninput)
 		{
 			ipIP.setVisible(false);
@@ -234,10 +236,10 @@ public class Execute extends Frame implements ActionListener {
 			}
 		} catch (UnknownHostException e) {
 			
-			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);;
+			JOptionPane.showMessageDialog(null, "�뿰寃� �떎�뙣","�븣由�",JOptionPane.ERROR_MESSAGE);;
 		} catch (IOException e) {
 			
-			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "�뿰寃� �떎�뙣","�븣由�",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -250,9 +252,9 @@ public class Execute extends Frame implements ActionListener {
 			os = socket.getOutputStream();
 			dos = new DataOutputStream(os);
 		}catch(IOException e){
-			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "�뿰寃� �떎�뙣","�븣由�",JOptionPane.ERROR_MESSAGE);
 			
-		}//stream설정 끝
+		}//stream�꽕�젙 �걹
 		
 		send_message(id);
 		user_list.add(id);
@@ -264,8 +266,8 @@ public class Execute extends Frame implements ActionListener {
 				while(true)
 				{
 					try {
-						String msg = dis.readUTF();//메세지 수신
-						System.out.println("서버로부터 수신된 메시지 : "+msg);
+						String msg = dis.readUTF();//硫붿꽭吏� �닔�떊
+						System.out.println("�꽌踰꾨줈遺��꽣 �닔�떊�맂 硫붿떆吏� : "+msg);
 						
 						inmessage(msg);
 					} catch (IOException e) {
@@ -275,7 +277,7 @@ public class Execute extends Frame implements ActionListener {
 							dos.close();
 							dis.close();
 							socket.close();
-							JOptionPane.showMessageDialog(null, "서버와 접속 끊어짐","알림",JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "�꽌踰꾩� �젒�냽 �걡�뼱吏�","�븣由�",JOptionPane.ERROR_MESSAGE);
 						}catch(IOException e2){}
 						break;
 					}
@@ -287,17 +289,17 @@ public class Execute extends Frame implements ActionListener {
 		th.start();
 	}
 	
-	private void inmessage(String str)//서버로부터 들어오는 모든 메세지
+	private void inmessage(String str)//�꽌踰꾨줈遺��꽣 �뱾�뼱�삤�뒗 紐⑤뱺 硫붿꽭吏�
 	{
 		st = new StringTokenizer(str, "/");
 		
 		String protocol = st.nextToken();
 		String Message = st.nextToken();
 		
-		System.out.println("프로토콜 : " + protocol);
-		System.out.println("내용 : "+Message);
+		System.out.println("�봽濡쒗넗肄� : " + protocol);
+		System.out.println("�궡�슜 : "+Message);
 		
-		if(protocol.equals("NewUser"))//새로운 접속자
+		if(protocol.equals("NewUser"))//�깉濡쒖슫 �젒�냽�옄
 		{
 			user_list.add(Message);
 		}
@@ -310,8 +312,8 @@ public class Execute extends Frame implements ActionListener {
 		{
 			String note = st.nextToken();
 			
-			System.out.println(Message+"사용자로부터 온 쪽지"+note);
-			JOptionPane.showMessageDialog(null, note, Message+"님으로 부터의 쪽지",JOptionPane.CLOSED_OPTION);
+			System.out.println(Message+"�궗�슜�옄濡쒕��꽣 �삩 履쎌�"+note);
+			JOptionPane.showMessageDialog(null, note, Message+"�떂�쑝濡� 遺��꽣�쓽 履쎌�",JOptionPane.CLOSED_OPTION);
 		}
 		else if(protocol.equals("user_list_update"))
 		{
@@ -324,7 +326,7 @@ public class Execute extends Frame implements ActionListener {
 		}
 		else if(protocol.equals("CreateRoomFail"))
 		{
-			JOptionPane.showMessageDialog(null, "방 만들기 실패","알림",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "諛� 留뚮뱾湲� �떎�뙣","�븣由�",JOptionPane.ERROR_MESSAGE);
 		}
 		else if(protocol.equals("New_Room"))
 		{
@@ -351,7 +353,7 @@ public class Execute extends Frame implements ActionListener {
 			My_Room = Message;
 			rest.setVisible(false);
 			chatroom.setVisible(true);
-			JOptionPane.showMessageDialog(null, "채팅방에 입장했습니다.","알림",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "梨꾪똿諛⑹뿉 �엯�옣�뻽�뒿�땲�떎.","�븣由�",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(protocol.equals("User_out"))
 		{
@@ -372,6 +374,13 @@ public class Execute extends Frame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
+		try {
+	         // UI 라이브러리 적용
+	         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	      } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
 		new Execute();
 
 	}
