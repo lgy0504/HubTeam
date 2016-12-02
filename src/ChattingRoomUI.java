@@ -24,6 +24,8 @@ public class ChattingRoomUI extends JFrame{
 	JTextField textField = new JTextField(); // 채팅입력
 	JTextArea textArea = new JTextArea();
 	JButton btnchat = new JButton("     \uC804\uC1A1     ");
+	JButton btnExit = new JButton("   \uB098\uAC00\uAE30   ");
+	JButton btnEmoticon = new JButton("\uC774\uBAA8\uD2F0\uCF58");
 	
 
 	/**
@@ -76,77 +78,16 @@ public class ChattingRoomUI extends JFrame{
 		
 		panel.add(textField, BorderLayout.CENTER);
 		
-		
-		
-		/*
-		textField.addKeyListener(new KeyListener() {			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String keyword = textField.getText();
-					//textArea.append(UserName + " : " + keyword+"\n");
-					textArea.append("한창수 : " + keyword +"\n");
-					textField.setText("");
-				}
-			}
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub				
-			}
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub				
-			}
-		});
-		*/
 		textField.setColumns(10);
 				
-		
-		/*
-		btnchat.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String keyword = textField.getText();
-				//textArea.append(UserName + " : " + keyword+"\n");
-				textArea.append("한창수 : " + keyword +"\n");
-				textField.setText("");
-			}
-		});
-		*/
 		panel.add(btnchat, BorderLayout.EAST);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(466, 384, 211, 27);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		
-		JButton btnExit = new JButton("   \uB098\uAC00\uAE30   "); // 나가기버튼 액션 대기실로
-		btnExit.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				dispose();
-				
-			}
-		});
-		
-		JButton btnEmoticon = new JButton("\uC774\uBAA8\uD2F0\uCF58");
-		btnEmoticon.addActionListener(new ButtonListener());
 		panel_1.add(btnEmoticon, BorderLayout.WEST);
 		panel_1.add(btnExit, BorderLayout.EAST);
 		
 	}	
-	class ButtonListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("\uC774\uBAA8\uD2F0\uCF58")) {
-				System.out.println(e.getActionCommand());
-				//frame.setVisible(false);
-				emoticonUI emoticon = new emoticonUI();
-			}
-		}
-	}
-
 }

@@ -39,7 +39,6 @@ public class InputIP extends JFrame {
 		JLabel IP = new JLabel("IP");
 		IP.setBounds(119, 70, 14, 21);
 		panel.add(IP);
-		//IP.setFont(new Font("굴림", Font.PLAIN, 18));
 		IP.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		textField = new JTextField();

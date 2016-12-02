@@ -299,10 +299,26 @@ public class Server extends JFrame implements ActionListener{
 					RoomInfo new_room = new RoomInfo(message, this);
 					room_vc.add(new_room);
 					send_Message("CreateRoom/"+message);
+					new_room.Add_User(this);
+					
 					
 					BroadCast("New_Room/"+message);
 				}
 				RoomCh = true;
+			}
+			else if(protocol.equals("RemoveRoom"))
+			{
+				for(int i=0; i<room_vc.size();i++)
+				{
+					RoomInfo remove_room = (RoomInfo)room_vc.elementAt(i);
+					
+					if(remove_room.Room_name.equals(message))
+					{
+						room_vc.remove(remove_room);
+						send_Message("RemoveRoom/"+message);
+						
+					}	
+				}
 			}
 			else if(protocol.equals("Chatting"))
 			{
@@ -330,6 +346,19 @@ public class Server extends JFrame implements ActionListener{
 						//»ç¿ëÀÚ Ãß°¡
 						r.Add_User(this);
 						send_Message("JoinRoom/"+message);
+					}
+				}
+			}
+			else if(protocol.equals("ExitRoom"))
+			{
+				for(int i=0;i<room_vc.size();i++)
+				{
+					RoomInfo r = (RoomInfo)room_vc.elementAt(i);
+					if (r.Room_name.equals(message)) 
+					{
+						r.BroadCast_Room("Chatting/¾Ë¸²/******"+Nickname+"´ÔÀÌ ÅðÀåÇÏ¼Ì½À´Ï´Ù******");
+						r.Remove_User(this);
+						send_Message("ExitRoom/"+message);
 					}
 				}
 			}
@@ -372,10 +401,12 @@ public class Server extends JFrame implements ActionListener{
 				UserInfo u = (UserInfo)Room_user_vc.elementAt(i);
 				u.send_Message(str);
 			}
-
-
 		}
 		private void Add_User(UserInfo u)
+		{
+			this.Room_user_vc.add(u);
+		}
+		private void Remove_User(UserInfo u)
 		{
 			this.Room_user_vc.add(u);
 		}

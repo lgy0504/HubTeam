@@ -40,7 +40,6 @@ public class Execute extends Frame implements ActionListener {
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	
-	
 	Vector user_list = new Vector();
 	Vector room_list = new Vector();
 	StringTokenizer st;
@@ -75,7 +74,7 @@ public class Execute extends Frame implements ActionListener {
 			con = (Connection) DriverManager.getConnection(url, strUser, strPassword);
 			stmt = (Statement) con.createStatement();
 		} catch (Exception b) {
-			System.out.println("db占쎈염野�怨���占쎈��");
+			System.out.println("db연결실패");
 		}
 		
 		log.signUp.addActionListener(this);
@@ -84,8 +83,12 @@ public class Execute extends Frame implements ActionListener {
 		log.inputIP.addActionListener(this);
 		rest.makeroombtn.addActionListener(this);
 		rest.joinroombtn.addActionListener(this);
+		rest.btnMsg.addActionListener(this);
 		chatroom.btnchat.addActionListener(this);
 		ipIP.btninput.addActionListener(this);
+		chatroom.btnExit.addActionListener(this);
+		chatroom.btnEmoticon.addActionListener(this);
+		
 		
 		chatroom.textField.addKeyListener
 	      (new KeyAdapter() {
@@ -114,12 +117,12 @@ public class Execute extends Frame implements ActionListener {
 			
 			if(ipIP.textField.getText().length()==0)
 			{
-				JOptionPane.showMessageDialog(null, "IP��占� 占쎌��占쎌�곤옙鍮�雅��깃쉭占쎌��","login error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "IP를 입력해주세요","login error",JOptionPane.ERROR_MESSAGE);
 				ipIP.textField.requestFocus();
 			}
 			else if(ipIP.textField_1.getText().length()==0)
 			{
-				JOptionPane.showMessageDialog(null, "Port甕곕������占� 占쎌��占쎌�곤옙鍮�雅��깃쉭占쎌��","login error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Port번호를 입력해주세요","login error",JOptionPane.ERROR_MESSAGE);
 				ipIP.textField_1.requestFocus();
 			}
 			else 
@@ -132,10 +135,9 @@ public class Execute extends Frame implements ActionListener {
 					rest.lbl_NickView.setText(name);
 					
 					ip = ipIP.textField.getText().trim();
-				port = Integer.parseInt(ipIP.textField_1.getText().trim());
-				//Integer.parseInt(port_tf.getText().trim());
-				id = log.textID.getText().trim();
-				Network();	
+					port = Integer.parseInt(ipIP.textField_1.getText().trim());
+					id = log.textID.getText().trim();
+					Network();	
 				}else JOptionPane.showMessageDialog(null, "It's not correct your ID or PW","login error",JOptionPane.ERROR_MESSAGE);
 				
 			}
@@ -161,24 +163,44 @@ public class Execute extends Frame implements ActionListener {
 			
 			send_message("JoinRoom/"+JoinRoom);
 			
-			System.out.println("獄�占� 筌〓�肉� 甕곌쑵�� 占쎄깻�깍옙");
-		}else if(e.getSource() == rest.makeroombtn)
+			System.out.println("방 참여 버튼 클릭");
+		}else if(obj.equals(rest.makeroombtn))
 		{
-			String roomname = JOptionPane.showInputDialog("獄�占� 占쎌���깍옙");
+			String roomname = JOptionPane.showInputDialog("방 이름");
 			if(roomname != null)
 			{
 				send_message("CreateRoom/"+roomname);
 			}
-			System.out.println("獄�占� 筌���諭얏묾占� 甕곌쑵�� 占쎄깻�깍옙");
-		}else if(e.getSource() == chatroom.btnchat)
+			System.out.println("방 만들기 버튼 클릭");
+		}else if(obj.equals(chatroom.btnchat))
 		{
 			send_message("Chatting/"+My_Room+"/"+chatroom.textField.getText().trim());
 			chatroom.textField.setText("");
 			chatroom.textField.requestFocus();
-			System.out.println("占쎌�억옙�� 甕곌쑵�� 占쎄깻�깍옙");
-		}else if(e.getSource() == ipIP.btninput)
+			System.out.println("전송 버튼 클릭");
+		}else if(obj.equals(ipIP.btninput))
 		{
 			ipIP.setVisible(false);
+		}else if(obj.equals(chatroom.btnExit))
+		{
+			String ExitRoom = (String)rest.Room_list.getSelectedValue();
+			send_message("ExitRoom/"+ExitRoom);
+			chatroom.setVisible(false);
+			rest.setVisible(true);
+		}else if(obj.equals(chatroom.btnEmoticon))
+		{
+			emoticonUI emoticon = new emoticonUI();
+		}else if(obj.equals(rest.btnMsg))
+		{
+			System.out.println("쪽지 보내기 버튼 클릭");
+			String user = (String)rest.User_list.getSelectedValue();
+			String note = JOptionPane.showInputDialog("보낼메세지");
+			
+			if(note!=null)
+			{
+				send_message("Note/"+user+"/"+note);
+			}
+			System.out.println("받는사람 : "+user+"보낼 내용:"+note);
 		}
 		
 	}
@@ -235,10 +257,10 @@ public class Execute extends Frame implements ActionListener {
 			}
 		} catch (UnknownHostException e) {
 			
-			JOptionPane.showMessageDialog(null, "占쎈염野�占� 占쎈��占쎈��","占쎈르�깍옙",JOptionPane.ERROR_MESSAGE);;
+			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);;
 		} catch (IOException e) {
 			
-			JOptionPane.showMessageDialog(null, "占쎈염野�占� 占쎈��占쎈��","占쎈르�깍옙",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -251,9 +273,9 @@ public class Execute extends Frame implements ActionListener {
 			os = socket.getOutputStream();
 			dos = new DataOutputStream(os);
 		}catch(IOException e){
-			JOptionPane.showMessageDialog(null, "占쎈염野�占� 占쎈��占쎈��","占쎈르�깍옙",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "연결 실패","알림",JOptionPane.ERROR_MESSAGE);
 			
-		}//stream占쎄�占쎌�� 占쎄국
+		}//stream setting end
 		
 		send_message(id);
 		user_list.add(id);
@@ -265,8 +287,8 @@ public class Execute extends Frame implements ActionListener {
 				while(true)
 				{
 					try {
-						String msg = dis.readUTF();//筌�遺욧쉭筌�占� 占쎈��占쎈��
-						System.out.println("占쎄�甕곌쑬以��븝옙占쎄숲 占쎈��占쎈��占쎈� 筌�遺용��筌�占� : "+msg);
+						String msg = dis.readUTF();//message reception
+						System.out.println("서버로부터 수신된메시지 : "+msg);
 						
 						inmessage(msg);
 					} catch (IOException e) {
@@ -276,7 +298,7 @@ public class Execute extends Frame implements ActionListener {
 							dos.close();
 							dis.close();
 							socket.close();
-							JOptionPane.showMessageDialog(null, "占쎄�甕곌쑴占� 占쎌��占쎈�� 占쎄괌占쎈선筌�占�","占쎈르�깍옙",JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "서버와 접속 끊어짐","알림",JOptionPane.ERROR_MESSAGE);
 						}catch(IOException e2){}
 						break;
 					}
@@ -288,17 +310,17 @@ public class Execute extends Frame implements ActionListener {
 		th.start();
 	}
 	
-	private void inmessage(String str)//占쎄�甕곌쑬以��븝옙占쎄숲 占쎈굶占쎈선占쎌�ㅿ옙�� 筌��ㅻ군 筌�遺욧쉭筌�占�
+	private void inmessage(String str)//서버로부터 들어오는 모든 메세지
 	{
 		st = new StringTokenizer(str, "/");
 		
 		String protocol = st.nextToken();
 		String Message = st.nextToken();
 		
-		System.out.println("占쎈늄嚥≪������占� : " + protocol);
-		System.out.println("占쎄땀占쎌�� : "+Message);
+		System.out.println("프로토콜 : " + protocol);
+		System.out.println("내용 : "+Message);
 		
-		if(protocol.equals("NewUser"))//占쎄�嚥≪���� 占쎌��占쎈�쏙옙��
+		if(protocol.equals("NewUser"))//새로운 접속자
 		{
 			user_list.add(Message);
 		}
@@ -311,8 +333,8 @@ public class Execute extends Frame implements ActionListener {
 		{
 			String note = st.nextToken();
 			
-			System.out.println(Message+"占쎄�占쎌��占쎌��嚥≪��占쏙옙苑� 占쎌�� 筌���占�"+note);
-			JOptionPane.showMessageDialog(null, note, Message+"占쎈��占쎌��嚥∽옙 �븝옙占쎄숲占쎌�� 筌���占�",JOptionPane.CLOSED_OPTION);
+			System.out.println(Message+"사용자로부터 온 쪽지"+note);
+			JOptionPane.showMessageDialog(null, note, Message+"님으로 부터의 쪽지",JOptionPane.CLOSED_OPTION);
 		}
 		else if(protocol.equals("user_list_update"))
 		{
@@ -325,7 +347,7 @@ public class Execute extends Frame implements ActionListener {
 		}
 		else if(protocol.equals("CreateRoomFail"))
 		{
-			JOptionPane.showMessageDialog(null, "獄�占� 筌���諭얏묾占� 占쎈��占쎈��","占쎈르�깍옙",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "방 만들기 실패","알림",JOptionPane.ERROR_MESSAGE);
 		}
 		else if(protocol.equals("New_Room"))
 		{
@@ -338,7 +360,6 @@ public class Execute extends Frame implements ActionListener {
 			chatroom.textArea.append(Message+" : "+msg+"\n");
 			
 		}
-		
 		else if(protocol.equals("OldRoom"))
 		{
 			room_list.add(Message);
@@ -352,12 +373,17 @@ public class Execute extends Frame implements ActionListener {
 			My_Room = Message;
 			rest.setVisible(false);
 			chatroom.setVisible(true);
-			JOptionPane.showMessageDialog(null, "筌�袁る�욤��밸� 占쎌��占쎌�ｏ옙六쏙옙�울옙�뀐옙��.","占쎈르�깍옙",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "채팅방에 입장했습니다.","알림",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(protocol.equals("User_out"))
 		{
 			user_list.remove(Message);
 			
+		}else if(protocol.equals("ExitRoom"))
+		{
+			My_Room = Message;
+			chatroom.setVisible(false);
+			rest.setVisible(true);
 		}
 		
 	}
@@ -374,10 +400,8 @@ public class Execute extends Frame implements ActionListener {
 
 	public static void main(String[] args) {
 		try {
-	         // UI �쇱�대��щ━ ����
 	         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	      } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-	         // TODO Auto-generated catch block
 	         e.printStackTrace();
 	      }
 		new Execute();
