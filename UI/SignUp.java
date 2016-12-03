@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -55,7 +57,14 @@ public class SignUp extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
+		final ImageIcon icon = new ImageIcon("image/Login.jpg");		
+		JPanel panel = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setBounds(10, 10, 400, 200);
 		contentPane.add(panel);
