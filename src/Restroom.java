@@ -1,8 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,22 +23,28 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Restroom extends JFrame {
 
 	
-	JButton makeroombtn = new JButton("\uBC29 \uB9CC\uB4E4\uAE30");
-	JButton joinroombtn = new JButton("\uBC29 \uB4E4\uC5B4\uAC00\uAE30");
-	JButton btnMsg = new JButton("\uCABD\uC9C0 \uBCF4\uB0B4\uAE30");
+	JButton makeroombtn = new JButton("");
+	JButton joinroombtn = new JButton("");
 	JPanel contentPane;
 	JLabel lbl_IpView, lbl_IdView,lbl_NickView;
-	JList Room_list = new JList();//��ü ����
-	JList User_list = new JList();//��ü ������
+	JList Room_list = new JList();//전체 방목록
+	JList User_list = new JList();//전체 접속자
 	
 	public Restroom() {
 		setResizable(false);
 		setTitle("Hub Chatting Program");
-		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+ 		Image img = toolkit.getImage("Image/Title.PNG");
+ 		setIconImage(img);
+		makeroombtn.setIcon(new ImageIcon("image/Roombtn1.PNG"));
+		joinroombtn.setIcon(new ImageIcon("image/Roombtn2.PNG"));
+ 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -51,18 +61,32 @@ public class Restroom extends JFrame {
 		menuBar.add(helpMenus);
 
 		JMenuItem proInfoItem = new JMenuItem("\uD504\uB85C\uADF8\uB7A8 \uC815\uBCF4");
-		helpMenus.add(proInfoItem);
-		
+		helpMenus.add(proInfoItem);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 705, 520);
-		contentPane = new JPanel();
+		setBounds(100, 100, 615, 523);
+		contentPane = new JPanel();		
+ 		final ImageIcon icon = new ImageIcon("image/Restroom.jpg");		//이미지 삽입
+		contentPane = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel roomlistPane = new JPanel();
+ 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+		JPanel roomlistPane = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon1.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		roomlistPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBC29 \uBAA9\uB85D", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		roomlistPane.setBounds(10, 10, 500, 445);
+		roomlistPane.setBounds(30, 16, 319, 445);
 		contentPane.add(roomlistPane);
 		roomlistPane.setLayout(new BorderLayout(0, 0));
 		
@@ -74,30 +98,58 @@ public class Restroom extends JFrame {
 		JPanel btnpanel = new JPanel();
 		roomlistPane.add(btnpanel, BorderLayout.SOUTH);
 		btnpanel.setLayout(new GridLayout(0, 2, 0, 0));
+		makeroombtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		
 		
 		btnpanel.add(makeroombtn);
+		joinroombtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		
 		btnpanel.add(joinroombtn);
-		
-		JPanel UserPane = new JPanel();
+
+ 		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+		JPanel UserPane = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon2.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		UserPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),	"\uC0AC\uC6A9\uC790 \uBAA9\uB85D", TitledBorder.CENTER,	TitledBorder.TOP, null, null));
-		UserPane.setBounds(520, 10, 170, 250);
+		UserPane.setBounds(390, 16, 170, 250);
 		contentPane.add(UserPane);
 		UserPane.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		UserPane.add(scrollPane_1, BorderLayout.CENTER);
-		
 		scrollPane_1.setViewportView(User_list);
 		
+		JButton btnMsg = new JButton("");
+		btnMsg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnMsg.setIcon(new ImageIcon("image/Msbtn.PNG"));
 		UserPane.add(btnMsg, BorderLayout.SOUTH);
 		
-		JPanel MyinfoPane = new JPanel();
+		
+ 		final ImageIcon icon3 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+		JPanel MyinfoPane = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon3.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		MyinfoPane.setLayout(null);
 		MyinfoPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uB0B4 \uC815\uBCF4", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		MyinfoPane.setBounds(520, 270, 171, 185);
+		MyinfoPane.setBounds(400, 276, 171, 185);
 		contentPane.add(MyinfoPane);
 		
 		JLabel lbl_Ip = new JLabel("IP");
