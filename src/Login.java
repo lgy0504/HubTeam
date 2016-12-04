@@ -2,6 +2,10 @@ import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
@@ -13,67 +17,87 @@ public class Login extends JFrame {
 
 	public Login() {
 		this.setTitle("Hub chatting Login");
-	    Toolkit toolkit = Toolkit.getDefaultToolkit();
-	    Image img = toolkit.getImage("Image/Title.PNG");
-	    setIconImage(img);
+ 		Toolkit toolkit = Toolkit.getDefaultToolkit();
+ 		Image img = toolkit.getImage("Image/Title.PNG");
+ 		setIconImage(img);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100, 100, 339, 460);
+		this.setBounds(100, 100, 320, 491);
+		
+		
 		
 		JPanel contentPane = new JPanel();
-		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		contentPane.setLayout(null);
 		
-	    final ImageIcon icon = new ImageIcon("Image/Login.jpg");
-	  	
-	    JPanel jPanel = new JPanel(){
-		           public void paintComponent(Graphics g) {
-		               g.drawImage(icon.getImage(), 0, 0, null);
-		               setOpaque(false);
-		               super.paintComponent(g);
-		              } 
-		       };
+		
+		final ImageIcon icon = new ImageIcon("image/Login.jpg");		//Ïù¥ÎØ∏ÏßÄ ÏÇΩÏûÖ
+		JPanel jPanel = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		jPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		jPanel.setBounds(0, 0, 338, 432);
+		jPanel.setBounds(0, 0, 314, 463);
 		jPanel.setLayout(null);
 		contentPane.add(jPanel);
 		
-		JLabel ID = new JLabel("æ∆¿Ãµ");
-		ID.setBounds(26, 326, 62, 18);
+		JLabel ID = new JLabel("ÏïÑÏù¥Îîî");
+		ID.setBounds(23, 355, 62, 18);
 		jPanel.add(ID);
 
-		JLabel PW = new JLabel("∫Òπ–π¯»£");
-		PW.setBounds(26, 354, 62, 18);
+		JLabel PW = new JLabel("ÎπÑÎ∞ÄÎ≤àÌò∏");
+		PW.setBounds(23, 383, 62, 18);
 		jPanel.add(PW);
 
 		textID = new JTextField();
-		textID.setBounds(100, 324, 116, 24);
+		textID.setBounds(97, 353, 116, 24);
 		jPanel.add(textID);
 		textID.setColumns(10);
 
 		textPW = new JTextField();
-		textPW.setBounds(100, 354, 116, 24);
+		textPW.setBounds(97, 381, 116, 24);
 		jPanel.add(textPW);
 		textPW.setColumns(10);
 
-		login = new JButton("∑Œ±◊¿Œ");
-		login.setBounds(228, 322, 90, 27);
+		login = new JButton("");
+		login.setIcon(new ImageIcon("image/loginbtn.PNG"));
+		login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		login.setBounds(222, 351, 80, 27);
 		jPanel.add(login);
 
-		signUp = new JButton("»∏ø¯∞°¿‘"); 
-		signUp.setBounds(228, 350, 90, 27);
+		signUp = new JButton("");
+		signUp.setIcon(new ImageIcon("image/SignUpbtn.PNG"));
+		signUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			
+			}
+		});
+		signUp.setBounds(222, 379, 80, 27);
 		jPanel.add(signUp);
 
-		JLabel IP = new JLabel("º≠πˆ æ∆¿Ã««");
-		IP.setBounds(26, 404, 80, 18);
+		JLabel IP = new JLabel("ÏÑúÎ≤Ñ ÏïÑÏù¥Ìîº");
+		IP.setBounds(23, 425, 80, 18);
 		jPanel.add(IP);
 
-		inputIP = new JButton("IP ¿‘∑¬");
-		inputIP.setBounds(100, 400, 116, 27);
+		inputIP = new JButton("");
+		inputIP.setIcon(new ImageIcon("image/IPbtn.PNG"));
+		inputIP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		inputIP.setBounds(97, 421, 116, 27);
 		jPanel.add(inputIP);
 		
 		this.setVisible(true);
 	}
+
 }
