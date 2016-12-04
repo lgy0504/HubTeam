@@ -1,11 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -21,11 +24,9 @@ import javax.swing.border.TitledBorder;
 public class ChattingRoomUI extends JFrame{
 
 	private JPanel contentPane;
-	JTextField textField = new JTextField(); // ä���Է�
+	JTextField textField = new JTextField(); // 채팅입력
 	JTextArea textArea = new JTextArea();
-	JButton btnchat = new JButton("     \uC804\uC1A1     ");
-	JButton btnExit = new JButton("   \uB098\uAC00\uAE30   ");
-	JButton btnEmoticon = new JButton("\uC774\uBAA8\uD2F0\uCF58");
+	JButton btnchat = new JButton("");
 	
 
 	/**
@@ -49,45 +50,84 @@ public class ChattingRoomUI extends JFrame{
 	 */
 	public ChattingRoomUI() {
 		setResizable(false);
-		
+		setTitle("ChattingRoom");
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+ 		Image img = toolkit.getImage("Image/Title.PNG");
+ 		setIconImage(img);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 690, 450);
-		contentPane = new JPanel();
+		setBounds(100, 100, 673, 450);
+ 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+		contentPane = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon1.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel_Center = new JPanel();
+		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+		JPanel panel_Center = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon2.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
 		panel_Center.setBorder(new TitledBorder(null, "\uCC44\uD305\uCC3D", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panel_Center.setBounds(5, 5, 672, 367);
+		panel_Center.setBounds(5, 5, 649, 367);
 		contentPane.add(panel_Center);
 		panel_Center.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel_Center.add(scrollPane, BorderLayout.CENTER);
 		
-		 // ä��â
+		 // 채팅창
 		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(5, 384, 455, 27);
-		contentPane.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		
-		panel.add(textField, BorderLayout.CENTER);
-		
+		textField.setBounds(15, 382, 319, 30);
+		contentPane.add(textField);
 		textField.setColumns(10);
-				
-		panel.add(btnchat, BorderLayout.EAST);
-
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(466, 384, 211, 27);
-		contentPane.add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.add(btnEmoticon, BorderLayout.WEST);
-		panel_1.add(btnExit, BorderLayout.EAST);
+		btnchat.setBounds(335, 382, 89, 29);
+		contentPane.add(btnchat);
+		btnchat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		btnchat.setIcon(new ImageIcon("image/sendbtn.PNG"));
+		
+			JButton btnEmoticon = new JButton("");
+			btnEmoticon.setBounds(443, 382, 110, 30);
+			contentPane.add(btnEmoticon);
+			btnEmoticon.setIcon(new ImageIcon("image/Emoticonbtn.PNG"));
+			
+			JButton btnExit = new JButton("");
+			btnExit.setBounds(553, 382, 89, 30);
+			contentPane.add(btnExit);
+			btnExit.setIcon(new ImageIcon("image/Exitbtn.PNG"));
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					dispose();
+					
+				}
+			});
+			btnEmoticon.addActionListener(new ButtonListener());
 		
 	}	
+	class ButtonListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand().equals("\uC774\uBAA8\uD2F0\uCF58")) {
+				System.out.println(e.getActionCommand());
+				//frame.setVisible(false);
+				emoticonUI emoticon = new emoticonUI();
+			}
+		}
+	}
+
 }
