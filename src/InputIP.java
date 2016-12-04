@@ -1,10 +1,8 @@
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +19,7 @@ public class InputIP extends JFrame {
 
 	 JTextField textField;
 	 JTextField textField_1;
+	 JLabel lblIpPort;
 	 JButton btninput;
 	 
 	public InputIP() {
@@ -38,7 +37,6 @@ public class InputIP extends JFrame {
 		this.setResizable(false);
 		contentPane.setLayout(null);
 		
-		
 		final ImageIcon icon = new ImageIcon("image/ip&port.jpg");		//이미지 삽입
 		JPanel panel = new JPanel(){
             public void paintComponent(Graphics g) {
@@ -55,7 +53,6 @@ public class InputIP extends JFrame {
 		JLabel IP = new JLabel("IP");
 		IP.setBounds(25, 104, 14, 21);
 		panel.add(IP);
-		//IP.setFont(new Font("굴림", Font.PLAIN, 18));
 		IP.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		textField = new JTextField();
@@ -67,12 +64,12 @@ public class InputIP extends JFrame {
 		label.setBounds(25, 135, 64, 19);
 		panel.add(label);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("굴림", Font.PLAIN, 16));
+		label.setFont(new Font("", Font.PLAIN, 16));
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(115, 134, 116, 24);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		panel.add(textField_1);		
+textField_1.setColumns(10);
 		
 		btninput = new JButton("");
 		btninput.setIcon(new ImageIcon("image/Inputbtn.PNG"));
