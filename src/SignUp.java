@@ -1,9 +1,13 @@
 import java.awt.Color;
  import java.awt.Font;
- import java.awt.event.ActionEvent;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
  import java.awt.event.ActionListener;
- 
- import javax.swing.JButton;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
  import javax.swing.JFrame;
  import javax.swing.JLabel;
  import javax.swing.JPanel;
@@ -23,48 +27,59 @@ import java.awt.Color;
  	public SignUp() {
  		
  		this.setTitle("Hub Chatting SignUp");
+ 		Toolkit toolkit = Toolkit.getDefaultToolkit();
+ 		Image img = toolkit.getImage("Image/Title.PNG");
+ 		setIconImage(img);
  		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 		this.setBounds(100, 100, 440, 303);
+ 		this.setBounds(100, 100, 307, 289);
  		contentPane = new JPanel();
  		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
  		this.setContentPane(contentPane);
  		contentPane.setLayout(null);
  		
- 		JPanel panel = new JPanel();
+		final ImageIcon icon = new ImageIcon("image/SignUp.jpg");		//Ïù¥ÎØ∏ÏßÄ ÏÇΩÏûÖ
+		JPanel panel = new JPanel(){
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+               } 
+        };
  		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
- 		panel.setBounds(0, 0, 410, 265);
+ 		panel.setBounds(0, 0, 291, 251);
  		contentPane.add(panel);
  		panel.setLayout(null);
  		
- 		JLabel lbl_ID = new JLabel("æ∆¿Ãµ");
- 	lbl_ID.setBounds(71, 98, 62, 18);
+ 		JLabel lbl_ID = new JLabel("ÏïÑÏù¥Îîî");
+ 		lbl_ID.setBounds(58, 120, 62, 18);
  		panel.add(lbl_ID);
  		
- 		JLabel lbl_PW = new JLabel("∫Òπ–π¯»£");
- 		lbl_PW.setBounds(71, 132, 62, 18);
+ 		JLabel lbl_PW = new JLabel("ÎπÑÎ∞ÄÎ≤àÌò∏");
+ 		lbl_PW.setBounds(58, 148, 62, 18);
  		panel.add(lbl_PW);
  		
- 		JLabel lbl_NAME = new JLabel("¥–≥◊¿”");
- 		lbl_NAME.setBounds(71, 166, 62, 18);
+ 		JLabel lbl_NAME = new JLabel("ÎãâÎÑ§ÏûÑ");
+ 		lbl_NAME.setBounds(58, 176, 62, 18);
  		panel.add(lbl_NAME);
  		
  		ID = new JTextField();
- 		ID.setBounds(145, 96, 116, 24);
+ 		ID.setBounds(132, 118, 116, 24);
  		panel.add(ID);
  		ID.setColumns(10);
  		
  		PW = new JTextField();
- 		PW.setBounds(145, 130, 116, 24);
+ 		PW.setBounds(132, 146, 116, 24);
  		panel.add(PW);
  		PW.setColumns(10);
  		
  		NAME = new JTextField();
- 		NAME.setBounds(145, 164, 116, 24);
+ 		NAME.setBounds(132, 174, 116, 24);
  		panel.add(NAME);
  		NAME.setColumns(10);
  	
- 		btnNew = new JButton("øœ∑·"); 
- 		btnNew.setBounds(155, 198, 105, 27);
+ 		btnNew = new JButton(""); 
+		btnNew.setIcon(new ImageIcon("image/Sucbtn.PNG"));
+ 		btnNew.setBounds(132, 209, 105, 27);
  		panel.add(btnNew);
  	
  	
