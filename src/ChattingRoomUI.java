@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,11 +25,12 @@ import javax.swing.border.TitledBorder;
 public class ChattingRoomUI extends JFrame{
 
 	private JPanel contentPane;
-	JTextField textField = new JTextField(); // 梨꾪똿�엯�젰
+	JTextField textField = new JTextField(); // 채팅입력
 	JTextArea textArea = new JTextArea();
 	JButton btnchat = new JButton("");
-	JButton btnExit = new JButton("   \uB098\uAC00\uAE30   ");
-	JButton btnEmoticon = new JButton("\uC774\uBAA8\uD2F0\uCF58");
+	JButton btnExit = new JButton("");
+	JButton btnEmoticon = new JButton("");
+	
 
 	/**
 	 * Launch the application.
@@ -55,9 +57,9 @@ public class ChattingRoomUI extends JFrame{
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
  		Image img = toolkit.getImage("Image/Title.PNG");
  		setIconImage(img);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 673, 450);
- 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 672, 450);
+		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
 		contentPane = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon1.getImage(), 0, 0, null);
@@ -69,7 +71,7 @@ public class ChattingRoomUI extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
+		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
 		JPanel panel_Center = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon2.getImage(), 0, 0, null);
@@ -85,7 +87,8 @@ public class ChattingRoomUI extends JFrame{
 		JScrollPane scrollPane = new JScrollPane();
 		panel_Center.add(scrollPane, BorderLayout.CENTER);
 		
-		 // 梨꾪똿李�
+		 // 채팅창
+		 // 채팅창
 		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
 		textField.setBounds(15, 382, 319, 30);
@@ -106,29 +109,16 @@ public class ChattingRoomUI extends JFrame{
 			btnEmoticon.setIcon(new ImageIcon("image/Emoticonbtn.PNG"));
 			
 			JButton btnExit = new JButton("");
-			btnExit.setBounds(553, 382, 89, 30);
-			contentPane.add(btnExit);
-			btnExit.setIcon(new ImageIcon("image/Exitbtn.PNG"));
-			btnExit.addActionListener(new ActionListener() {			
-				@Override
+			btnExit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
 					dispose();
-					
 				}
 			});
-			btnEmoticon.addActionListener(new ButtonListener());
+			btnExit.setBounds(554, 382, 89, 30);
+			contentPane.add(btnExit);
+			btnExit.setIcon(new ImageIcon("image/Exitbtn.PNG"));
+
 		
 	}	
-	class ButtonListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("\uC774\uBAA8\uD2F0\uCF58")) {
-				System.out.println(e.getActionCommand());
-				//frame.setVisible(false);
-				emoticonUI emoticon = new emoticonUI();
-			}
-		}
-	}
 
 }
