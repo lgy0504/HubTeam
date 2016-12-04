@@ -33,9 +33,9 @@ public class Restroom extends JFrame {
 	JButton joinroombtn = new JButton("");
 	JPanel contentPane;
 	JLabel lbl_IpView, lbl_IdView,lbl_NickView;
-	JList Room_list = new JList();//전체 방목록
-	JList User_list = new JList();//전체 접속자
-	
+	JList Room_list = new JList();//�쟾泥� 諛⑸ぉ濡�
+	JList User_list = new JList();//�쟾泥� �젒�냽�옄
+	JButton btnMsg = new JButton("\uCABD\uC9C0 \uBCF4\uB0B4\uAE30");
 	public Restroom() {
 		setResizable(false);
 		setTitle("Hub Chatting Program");
@@ -65,7 +65,7 @@ public class Restroom extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 615, 523);
 		contentPane = new JPanel();		
- 		final ImageIcon icon = new ImageIcon("image/Restroom.jpg");		//이미지 삽입
+ 		final ImageIcon icon = new ImageIcon("image/Restroom.jpg");		//�씠誘몄� �궫�엯
 		contentPane = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon.getImage(), 0, 0, null);
@@ -77,7 +77,7 @@ public class Restroom extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
- 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+ 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
 		JPanel roomlistPane = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon1.getImage(), 0, 0, null);
@@ -113,7 +113,7 @@ public class Restroom extends JFrame {
 		
 		btnpanel.add(joinroombtn);
 
- 		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+ 		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
 		JPanel UserPane = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon2.getImage(), 0, 0, null);
@@ -139,7 +139,7 @@ public class Restroom extends JFrame {
 		UserPane.add(btnMsg, BorderLayout.SOUTH);
 		
 		
- 		final ImageIcon icon3 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+ 		final ImageIcon icon3 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
 		JPanel MyinfoPane = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon3.getImage(), 0, 0, null);

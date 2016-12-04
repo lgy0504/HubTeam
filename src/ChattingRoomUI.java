@@ -24,10 +24,11 @@ import javax.swing.border.TitledBorder;
 public class ChattingRoomUI extends JFrame{
 
 	private JPanel contentPane;
-	JTextField textField = new JTextField(); // 채팅입력
+	JTextField textField = new JTextField(); // 梨꾪똿�엯�젰
 	JTextArea textArea = new JTextArea();
 	JButton btnchat = new JButton("");
-	
+	JButton btnExit = new JButton("   \uB098\uAC00\uAE30   ");
+	JButton btnEmoticon = new JButton("\uC774\uBAA8\uD2F0\uCF58");
 
 	/**
 	 * Launch the application.
@@ -56,7 +57,7 @@ public class ChattingRoomUI extends JFrame{
  		setIconImage(img);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 450);
- 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+ 		final ImageIcon icon1 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
 		contentPane = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon1.getImage(), 0, 0, null);
@@ -68,7 +69,7 @@ public class ChattingRoomUI extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//이미지 삽입
+		final ImageIcon icon2 = new ImageIcon("image/Normal.jpg");		//�씠誘몄� �궫�엯
 		JPanel panel_Center = new JPanel(){
             public void paintComponent(Graphics g) {
                 g.drawImage(icon2.getImage(), 0, 0, null);
@@ -84,7 +85,7 @@ public class ChattingRoomUI extends JFrame{
 		JScrollPane scrollPane = new JScrollPane();
 		panel_Center.add(scrollPane, BorderLayout.CENTER);
 		
-		 // 채팅창
+		 // 梨꾪똿李�
 		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
 		textField.setBounds(15, 382, 319, 30);
