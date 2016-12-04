@@ -131,7 +131,6 @@ public class Server extends JFrame implements ActionListener{
 
 	}
 	public static void main(String[] args){
-		
 		new Server();
 		
 	}
@@ -296,29 +295,13 @@ public class Server extends JFrame implements ActionListener{
 				}
 				if(RoomCh)
 				{
-					RoomInfo new_room = new RoomInfo(message, this);
+					RoomInfo new_room = new RoomInfo(message, null);
 					room_vc.add(new_room);
 					send_Message("CreateRoom/"+message);
-					new_room.Add_User(this);
-					
 					
 					BroadCast("New_Room/"+message);
 				}
 				RoomCh = true;
-			}
-			else if(protocol.equals("RemoveRoom"))
-			{
-				for(int i=0; i<room_vc.size();i++)
-				{
-					RoomInfo remove_room = (RoomInfo)room_vc.elementAt(i);
-					
-					if(remove_room.Room_name.equals(message))
-					{
-						room_vc.remove(remove_room);
-						send_Message("RemoveRoom/"+message);
-						
-					}	
-				}
 			}
 			else if(protocol.equals("Chatting"))
 			{
@@ -392,6 +375,7 @@ public class Server extends JFrame implements ActionListener{
 		RoomInfo(String str, UserInfo u) 
 		{
 			this.Room_name = str;
+			if(u != null)
 			this.Room_user_vc.add(u);
 		}
 		public void BroadCast_Room(String str) //현재 방의 모든 사람에게 알린다
@@ -404,11 +388,12 @@ public class Server extends JFrame implements ActionListener{
 		}
 		private void Add_User(UserInfo u)
 		{
+			if(u != null)
 			this.Room_user_vc.add(u);
 		}
 		private void Remove_User(UserInfo u)
 		{
-			this.Room_user_vc.add(u);
+			this.Room_user_vc.remove(u);
 		}
 	}
 }

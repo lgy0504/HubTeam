@@ -343,7 +343,7 @@ public class Execute extends Frame implements ActionListener {
 		else if(protocol.equals("CreateRoom"))
 		{
 			My_Room = Message;
-			chatroom.setVisible(true);
+			//chatroom.setVisible(true);
 		}
 		else if(protocol.equals("CreateRoomFail"))
 		{
@@ -382,13 +382,14 @@ public class Execute extends Frame implements ActionListener {
 		}else if(protocol.equals("ExitRoom"))
 		{
 			My_Room = Message;
+			chatroom.textArea.setText("");
 			chatroom.setVisible(false);
 			rest.setVisible(true);
+			
 		}
 		
 	}
-	
-	
+
 	private void send_message(String str)
 	{
 		try {
